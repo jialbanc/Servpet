@@ -1,0 +1,42 @@
+body{
+        margin: 0 auto;
+        position: static;
+        width: 1360px;       
+}
+.panel-container{
+    padding-left: 200px;
+}
+
+.ui-menu{
+    font-family: 'Arial Regular', 'Arial';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    color: #000000;
+    text-align: center;
+    line-height: normal;
+    width: 983px;
+}
+#panel-background1{
+    background-color: #344163;
+}
+#fadeEffect img{
+    width: 800px;
+    margin-left: 90px;
+    margin-top: 20px;
+}
+#panel-background2{
+    background-color: #E8E8E8;
+    padding-top: 20px;
+}
+#panel-background2 td{
+    background-color: #E8E8E8;
+    border-style: none;
+}
+#panel-background2 tr{
+    border:0px solid;
+}
+#panel-background2 img{
+    width:200px;
+}
+

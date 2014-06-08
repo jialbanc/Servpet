@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>SERVPET</title>
+        <link rel="stylesheet" href="css/sesion.css"/>
+    </h:head>
+    <h:body>
+        <script type="text/javascript">  
+            $('#mb1').puimenubar();  
+            $('#mb2').puimenubar({  
+                autoDisplay: false  
+            });  
+        </script>   
+        <header id="main_header">SERVPET</header>
+        <h:form id="MenuPrincipal">  
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Home" icon="ui-icon-star">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                <p:menuitem value="Galería" icon="ui-icon-search">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                <p:menuitem value="Contáctenos" icon="ui-icon-document">
+                    <f:param name="i" value="2" />
+                <p:button target="_blank" value="Login" icon="ui-icon-key"/>
+                </p:menuitem>
+            </p:tabMenu>
+        </h:form>
+        
+        <h:form id="Sesion">
+          <h:panelGrid columns="2" id="matchGrid" cellpadding="5">                   
+                <h:outputLabel for="usuario" value="Usuario:" />
+                <p:inputTextarea id="usu" value="#{usuarioView.usuario}" label="Usuario1" required="true" />
+
+                <h:outputLabel for="pwd2" value="Password:" />
+                <p:password id="pwd" value="#{passwordView.password5}" label="Password" required="true" />
+            </h:panelGrid>
+
+            <p:commandButton update="matchGrid" value="Save" />
+        </h:form>
+    </h:body>
+</html>
+

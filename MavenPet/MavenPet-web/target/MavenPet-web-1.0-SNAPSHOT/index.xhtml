@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>SERVPET</title>
+        <link rel="stylesheet" href="css/index_style.css"/>
+    </h:head>
+    <h:body>
+        <div id="panel-background1">
+            <div id="panel-contariner1" class="panel-container">
+                <h:form id="form">  
+                    <p:growl id="messages"/>
+
+                    <p:menubar>
+                        <p:submenu label="Home" icon="ui-icon-document">
+                        </p:submenu>
+                        <p:menuitem value="Galería" icon="ui-icon-search">
+                            <f:param name="i" value="1" />
+                        </p:menuitem>
+                        <p:menuitem value="Contáctenos" icon="ui-icon-document">
+                            <f:param name="i" value="2" />
+                        </p:menuitem>
+
+                        <f:facet name="options">
+                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+
+                            <p:button target="_self" value="Logout" icon="ui-icon-close" href="https://angela-pc:8443/cas-server-webapp-3.5.2/logout" />
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+                <p:imageSwitch effect="fade" id="fadeEffect">
+                    <ui:repeat value="#{imagesView.images}" var="image" id="fadeEffectImages">
+                        <p:graphicImage value="images/#{image}" id="image" />
+                    </ui:repeat>
+                </p:imageSwitch>
+            </div>
+        </div>
+        <div id="panel-background2" >
+            <div id='panel-container-rehome' class="panel-container">
+                <p:outputLabel value="REHOME" />
+                <p:panelGrid id="gridImage" columns="2" >
+                    <p:graphicImage value="images/nature1.jpg" id="image1" />
+                    <p:graphicImage value="images/nature2.jpg" id="image2" />
+                    <p:graphicImage value="images/nature3.jpg" id="image3" />
+                    <p:graphicImage value="images/nature3.jpg" id="image4" />
+                </p:panelGrid>
+            </div>
+        </div>
+    </h:body>   
+</html>
+
