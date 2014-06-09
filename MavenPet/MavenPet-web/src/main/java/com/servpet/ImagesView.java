@@ -28,8 +28,8 @@ public class ImagesView {
     @PostConstruct
     public void init() {
         images = new ArrayList<String>();
-        for (int i = 1; i <= 3; i++) {
-            images.add("nature" + i + ".jpg");
+        for (int i = 1; i <= 5; i++) {
+            images.add("images" + i + ".jpg");
         }
     }
  
