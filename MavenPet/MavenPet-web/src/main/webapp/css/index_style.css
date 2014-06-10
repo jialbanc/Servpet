@@ -6,7 +6,9 @@ body{
 .panel-container{
     padding-left: 200px;
 }
-
+#image-logo{
+    width: 40%;
+}
 .ui-menu{
     font-family: 'Arial Regular', 'Arial';
     font-weight: 400;
@@ -21,23 +23,33 @@ body{
     background-color: #344163;
 }
 #fadeEffect img{
-    width: 800px;
-    height: 400px;
-    margin-left: 90px;
+    width: 920px;
+    height: 300px;
+    margin-left: 30px;
     margin-top: 20px;
+    margin-bottom: 15px;
 }
 #panel-background2{
     background-color: #E8E8E8;
     padding-top: 20px;
 }
 #panel-background2 td{
-    background-color: #E8E8E8;
+    background-color: white;
     border-style: none;
 }
 #panel-background2 tr{
     border:0px solid;
 }
-#panel-background2 img{
-    width:200px;
+
+#panel-container-rehome{
+    font-family: 'Arial Regular', 'Arial';
+    font-style: italic;
+    width: 550px;
+    background-color: white;
+}
+
+#panel-container-rehome img{
+    width:250px;
+    height:150px;
 }
 

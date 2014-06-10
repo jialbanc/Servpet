@@ -11,6 +11,9 @@
     </h:head>
     <h:body>
         <div id="panel-background1">
+            <div id="panel-container-logo" class="panel-container">
+                <p:graphicImage value="images/logo.png" id="image-logo" />
+            </div>
             <div id="panel-contariner1" class="panel-container">
                 <h:form id="form">  
                     <p:growl id="messages"/>
@@ -39,8 +42,8 @@
                 </p:imageSwitch>
             </div>
         </div>
-        <div id="panel-background2" >
-            <div id='panel-container-rehome' class="panel-container">
+        <div id="panel-background2" class="panel-container">
+            <div id='panel-container-rehome' >
                 <p:outputLabel value="REHOME" />
                 <p:panelGrid id="gridImage" columns="2" >
                     <p:graphicImage value="images/images2.jpg" id="image1" />
@@ -48,6 +51,9 @@
                     <p:graphicImage value="images/images4.jpg" id="image3" />
                     <p:graphicImage value="images/images5.jpg" id="image4" />
                 </p:panelGrid>
+            </div>
+            <div id="panel-container-noticias">
+                
             </div>
         </div>
     </h:body>   
