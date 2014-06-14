@@ -11,13 +11,12 @@
     </h:head>
     <h:body>
         <div id="panel-background1">
-            <div id="panel-container-logo" class="panel-container">
-                <p:graphicImage value="images/logo.png" id="image-logo" />
-            </div>
-            <div id="panel-contariner1" class="panel-container">
+            <div id="panel-container-header" class="panel-container">
+                <div id="panel-container-logo">
+                    <p:graphicImage value="images/logo.png" id="image-logo" />
+                </div>
                 <h:form id="form">  
                     <p:growl id="messages"/>
-
                     <p:menubar>
                         <p:submenu label="Home" icon="ui-icon-document">
                         </p:submenu>
@@ -27,14 +26,20 @@
                         <p:menuitem value="Contáctenos" icon="ui-icon-document">
                             <f:param name="i" value="2" />
                         </p:menuitem>
-
+                        <p:submenu label="Opciones" icon="ui-icon-wrench">
+                            <p:menuitem value="Cuenta" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
+                            <p:menuitem value="Mensajes" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-mail-closed" />
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://angela-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                            <p:separator />
+                            <p:menuitem value="Home" url="https://angela-pc:8443/MavenPet-web" icon="ui-icon-home" />
+                        </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
-
-                            <p:button target="_self" value="Logout" icon="ui-icon-close" href="https://angela-pc:8443/cas-server-webapp-3.5.2/logout" />
                         </f:facet>
                     </p:menubar>
                 </h:form>
+            </div>
+            <div id="panel-contariner-slider" class="panel-container">
                 <p:imageSwitch effect="fade" id="fadeEffect">
                     <ui:repeat value="#{imagesView.images}" var="image" id="fadeEffectImages">
                         <p:graphicImage value="images/#{image}" id="image" />
@@ -44,12 +49,14 @@
         </div>
         <div id="panel-background2" class="panel-container">
             <div id='panel-container-rehome' >
-                <p:outputLabel value="REHOME" />
+                <p:outputLabel id="label-rehome" value="REHOME" />
                 <p:panelGrid id="gridImage" columns="2" >
                     <p:graphicImage value="images/images2.jpg" id="image1" />
                     <p:graphicImage value="images/images3.jpg" id="image2" />
                     <p:graphicImage value="images/images4.jpg" id="image3" />
                     <p:graphicImage value="images/images5.jpg" id="image4" />
+                    <p:graphicImage value="images/images2.jpg" id="image5" />
+                    <p:graphicImage value="images/images4.jpg" id="image6" />
                 </p:panelGrid>
             </div>
             <div id="panel-container-noticias">
