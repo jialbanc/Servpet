@@ -1,10 +1,11 @@
 body{
-        margin: 0 auto;
-        position: static;
-        width: 1360px;       
+    margin: 0 auto;
+    position: static;
+    width: 1360px;       
 }
 #panel-background1{
     background-color: #344163;
+    padding-bottom: 20px;
 }
 .panel-container{
     padding-left: 200px;
@@ -22,69 +23,19 @@ body{
     line-height: normal;
     width: 885px;
 }
-
-#fadeEffect img{
-    width: 885px;
-    height: 300px;
-    margin-left: 5px;
-    margin-top: 20px;
-    margin-bottom: 15px;
-}
 #panel-background2{
     background-color: #EFEFEF;
     padding-top: 20px;
+}
+#panel-refill{
+    clear:both;
 }
 #panel-background-footer{
     background-color: #222222;
     height: 520px;
 }
-#panel-background2 td{
-    background-color: #F6F6F6;
-    border-style: none;
-    padding: 4px 20px;
-}
-#panel-background2 tr{
-    border:0px solid;
-}
-#panel-container-rehome{
-    float:left;
-    font-family: 'Arial';
-    width: 550px;
-    background-color: #F6F6F6;
-    padding-bottom: 20px;
-    padding-top: 20px;
-}
-#panel-container-rehome img{
-    width:236px;
-    height:142px;
-}
-#label-rehome{
-    padding-left: 20px;
-}
-#panel-container-noticias{
-    float:left;
-    width: 335px;
-    height: 374px;
-    background-color: #4D515D;
-}
-#panel-container-tag{
-    font-size: 17px;
-    color: white;
-    width:230px;
-    height:30px;
-    background-color: #1EA1C8;
-    margin-top: 8px;
-    padding-top: 10px;
-}
-#panel-container-tag label{
-    padding-top: 20px;
-    padding-left: 40px;
-}
-#panel-refill{
-    clear:both;
-}
 #panel-inner-footer{
-    width: 885px;
+    width: 77%;
     height: 170px;
     background-color: #4D515D;
 }
@@ -105,12 +56,29 @@ body{
 }
 #panel-footer-contact{
     float:left;
-    width: 292px;
+    width: 272px;
     height: 260px;
     padding-top: 15px;
     padding-left: 10px;
+    padding-right: 10px;
 }
 #label-footer-contact{
     color: white;
     font-size: 15px;
+}
+#panel-footer-location{
+    float:left;
+    width: 292px;
+    height: 260px;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#label-footer-location{
+    color: white;
+    font-size: 15px;
+}
+#twitter-widget-0{
+    width: 275px !important;
+    height:115% !important;
 }
