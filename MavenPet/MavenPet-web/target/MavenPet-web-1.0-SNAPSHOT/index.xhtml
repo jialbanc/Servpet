@@ -16,9 +16,18 @@
                 <div id="panel-container-logo">
                     <p:graphicImage value="images/logo.png" id="image-logo" />
                 </div>
+                <div id="menu-top" class="nav-bar">
+                    <h:form id="form_2">
+                        <p:commandLink value="Home" action="index.xhtml"></p:commandLink>
+                        <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
+                        <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                    </h:form>
+                </div>
+                <div id="panel-refill"></div>
                 <h:form id="form">  
                     <p:growl id="messages"/>
-                    <p:menubar>
+                    <p:menubar id="menu">
                         <p:submenu label="Home" icon="ui-icon-document">
                         </p:submenu>
                         <p:menuitem value="Galería" icon="ui-icon-search">
@@ -70,14 +79,20 @@
         <div id="panel-background-footer" class="panel-container">
             <div id="panel-inner-footer">
                 <p:outputLabel id="label-footer" value="DIVIERTASE Y APRENDA" />
-                
+
             </div>
             <div id="panel-footer-twitter">
                 <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
                 <a class="twitter-timeline" href="https://twitter.com/eluniversocom" data-widget-id="477981204549861376">Tweets por @eluniversocom</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-                    if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";
-                    fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                <script>!function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = p + "://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    }(document, "script", "twitter-wjs");</script>
 
 
             </div>

@@ -11,7 +11,24 @@ body{
     padding-left: 200px;
 }
 #panel-container-logo img{
-    width: 30%;
+    width: 100%;
+}
+#panel-container-logo{
+    width:348px;
+    float:left;
+}
+#menu-top{
+    padding-top: 1%;
+    padding-left: 19%;
+    width: 40%;
+    float: left;
+}
+.ui-commandlink{
+    text-decoration: none;
+    color: #6699ff;
+    padding-left: 15px;
+    font-size: 15px;
+    cursor: auto;
 }
 .ui-menu{
     font-family: 'Arial Regular', 'Arial';
@@ -82,3 +99,4 @@ body{
     width: 275px !important;
     height:115% !important;
 }
+
