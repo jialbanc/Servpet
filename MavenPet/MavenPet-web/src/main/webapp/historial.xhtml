@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>SERVPET</title>
+        <link rel="stylesheet" href="css/index_style.css"/>
+        <link rel="stylesheet" href="css/historial.css"/>
+    </h:head>
+    <h:body>
+        <div id="panel-background1">
+            <div id="panel-container-header" class="panel-container">
+                <div id="panel-container-logo">
+                    <p:graphicImage value="images/logo.png" id="image-logo" />
+                </div>
+                <h:form id="form">  
+                    <p:growl id="messages"/>
+                    <p:menubar>
+                        <p:submenu label="Home" icon="ui-icon-document">
+                        </p:submenu>
+                        <p:menuitem value="Historial" icon="ui-icon-search">
+                            <f:param name="i" value="1" />
+                        </p:menuitem>
+                        <p:menuitem value="Calendario" icon="ui-icon-document">
+                            <f:param name="i" value="2" />
+                        </p:menuitem>
+                        <p:menuitem value="Registro" icon="ui-icon-document">
+                            <f:param name="i" value="3" />
+                        </p:menuitem>
+                        <p:submenu label="Opciones" icon="ui-icon-wrench">
+                            <p:menuitem value="Cuenta" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
+                            <p:menuitem value="Mensajes" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-mail-closed" />
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://gianella09:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                            <p:separator />
+                            <p:menuitem value="Home" url="https://gianella09:8443/MavenPet-web" icon="ui-icon-home" />
+                        </p:submenu>
+                        <f:facet name="options">
+                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+        </div>
+            <h:form id="historial"> 
+                <p:dataScroller value="#{dataScrollerView.cars}" var="car" chunkSize="10" scrollHeight="500" mode="inline">
+                    <f:facet name="header">
+                       Historial de Clientes
+                    </f:facet>
+
+                    <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                    <!-- FALTA ARREGLAR LA CLASE CAR QUE CONTIENE LOS DATOS EXTRAIDO DE LAS BASE-->
+                    <div id="cliente">
+                    <p:graphicImage value="images/nature1.jpg"  /> 
+                    </div>
+                        <p:outputPanel>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Id:" />
+                                <h:outputText value="123" style="font-weight: bold"/>
+
+                                <h:outputText value="Year:" />
+                                <h:outputText value="123" style="font-weight: bold"/>
+
+                                <h:outputText value="Color:" />
+                                <h:outputText value="azul" style="font-weight: bold"/>
+                            </h:panelGrid>
+                        </p:outputPanel>
+                    
+                     </h:panelGrid>
+                </p:dataScroller>
+            </h:form>
+        <div id="panel-background-footer" class="panel-container">
+            <div id="panel-inner-footer">
+                <p:outputLabel id="label-footer" value="DIVIERTASE Y APRENDA" />
+
+            </div>
+            <div id="panel-footer-twitter">
+                <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
+                <a class="twitter-timeline" href="https://twitter.com/eluniversocom" data-widget-id="477981204549861376">Tweets por @eluniversocom</a>
+                <script>!function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = p + "://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    }(document, "script", "twitter-wjs");</script>
+
+
+            </div>
+            <div id="panel-footer-contact">
+                <p:outputLabel id="label-footer-contact" value="CONTÁCTENOS" />
+            </div>
+            <div id="panel-footer-location">
+                <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
+                <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
+                        width="90%" height="110%" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+             
+    </h:body>
+</html>
+
