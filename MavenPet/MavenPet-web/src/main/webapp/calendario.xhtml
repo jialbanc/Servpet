@@ -18,23 +18,35 @@
                 <div id="panel-container-logo">
                     <p:graphicImage value="images/logo.png" id="image-logo" />
                 </div>
+                <div id="menu-top" class="nav-bar">
+                    <h:form id="form_menutop">
+                        <p:commandLink value="Home" action="/"></p:commandLink>
+                        <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
+                        <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                    </h:form>
+                </div>
+                <div id="panel-refill"></div>
                 <h:form id="form">  
                     <p:growl id="messages"/>
-                    <p:menubar>
-                        <p:submenu label="Home" icon="ui-icon-document">
-                        </p:submenu>
-                        <p:menuitem value="Galería" icon="ui-icon-search">
-                            <f:param name="i" value="1" />
+                    <p:menubar id="menu">
+                        <p:menuitem value="Home" url="/" icon="ui-icon-home">
                         </p:menuitem>
-                        <p:menuitem value="Contáctenos" icon="ui-icon-document">
-                            <f:param name="i" value="2" />
+                        <p:menuitem value="Galeria" icon="ui-icon-search">
                         </p:menuitem>
+                        <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Registro" url="registro.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
+                        
+                        </p:menuitem>
+                        
                         <p:submenu label="Opciones" icon="ui-icon-wrench">
                             <p:menuitem value="Cuenta" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
                             <p:menuitem value="Mensajes" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-mail-closed" />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://angela-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
                             <p:separator />
-                            <p:menuitem value="Home" url="https://angela-pc:8443/MavenPet-web" icon="ui-icon-home" />
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
                         </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
