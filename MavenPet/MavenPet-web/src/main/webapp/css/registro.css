@@ -1,16 +1,17 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 21/06/2014, 06:50:59 PM
-    Author     : gianella
-*/
-
-#panel-register{
-    background: #ffffff;
-    height: 470px;
- 
-    
+#panel-container-body{
+    width: 77%;
+    font-family: 'Arial';
+    background-color: #FFF;
+    padding-bottom: 20px;
+    padding-top: 20px;   
+}
+#label-registro{
+    margin-left: 32%;
+}
+#panel-registro{
+    margin-top: 2%;
+    margin-left: 32%;
+}
+.ui-button{
+    margin-left: 18%;
 }

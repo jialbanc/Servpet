@@ -1,14 +1,14 @@
 body{
     margin: 0 auto;
     position: static;
-    width: 1360px;       
+    width: 100%;       
 }
 #panel-background1{
     background-color: #344163;
     padding-bottom: 20px;
 }
 .panel-container{
-    padding-left: 200px;
+    padding-left: 16%;
 }
 #panel-container-logo img{
     width: 100%;

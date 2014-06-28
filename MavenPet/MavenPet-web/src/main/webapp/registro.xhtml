@@ -51,68 +51,72 @@
                 </h:form>
             </div>
         </div>
-        <div id="panel-register">
-            <h:form>
-                <p:growl id="msgs" showDetail="true" />
+        <div id="panel-background2" class="panel-container">
+            <div id="panel-container-body">
+                <p:outputLabel id="label-registro" value="Registro de Empleados"/>
+                <div id="panel-registro">
+                    <h:form id="form_registro">
+                        <p:growl id="msgs" showDetail="true" />
 
-                <h:panelGrid columns="2" cellpadding="5">
-                    <p:outputLabel value="Nombre" for="acNombre" />
-                    <p:autoComplete id="acNombre" value="Cristhian" completeMethod="hol1" />
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel value="Nombre" for="acNombre" />
+                            <p:autoComplete id="acNombre" value="Cristhian" completeMethod="hol1" />
 
-                    <p:outputLabel value="Apellido" for="acApellido" />
-                    <p:autoComplete id="acApellido" value="Ponguillo" completeMethod="hol1" />
+                            <p:outputLabel value="Apellido" for="acApellido" />
+                            <p:autoComplete id="acApellido" value="Ponguillo" completeMethod="hol1" />
 
-                    <p:outputLabel value="Cedula" for="acCedula" />
-                    <p:autoComplete id="acCedula" value="0930561022" completeMethod="hol1" />
-                    
-                    <p:outputLabel value="Dirección" for="acDireccion" />
-                    <p:autoComplete id="acDireccion" value="Cdla.Orquideas Mz: 60 V:31" completeMethod="hol1" />
+                            <p:outputLabel value="Cedula" for="acCedula" />
+                            <p:autoComplete id="acCedula" value="0930561022" completeMethod="hol1" />
 
-                    <p:outputLabel value="Teléfono" for="acTelefono" />
-                    <p:autoComplete id="acTelefono" value="0988300843" completeMethod="hol1" />
+                            <p:outputLabel value="Dirección" for="acDireccion" />
+                            <p:autoComplete id="acDireccion" value="Cdla.Orquideas Mz: 60 V:31" completeMethod="hol1" />
 
-                    <p:outputLabel value="Rol" for="acRol" />
-                    <p:autoComplete id="acRol" value="Doctor" completeMethod="hol1" />
-                    
-                    <p:outputLabel value="Usuario" for="acUsuario" />
-                    <p:autoComplete id="acUsuario" value="cjpongui" completeMethod="hol1" />
-                    
-                    <p:outputLabel value="Contraseña" for="acContraseña" />
-                    <p:password id="acContraseña" value="pongui" feedback="true" inline="true" />
+                            <p:outputLabel value="Teléfono" for="acTelefono" />
+                            <p:autoComplete id="acTelefono" value="0988300843" completeMethod="hol1" />
+
+                            <p:outputLabel value="Rol" for="acRol" />
+                            <p:autoComplete id="acRol" value="Doctor" completeMethod="hol1" />
+
+                            <p:outputLabel value="Usuario" for="acUsuario" />
+                            <p:autoComplete id="acUsuario" value="cjpongui" completeMethod="hol1" />
+
+                            <p:outputLabel value="Contraseña" for="acContraseña" />
+                            <p:password id="acContraseña" value="pongui" feedback="true" inline="true" />
 
 
-                </h:panelGrid>
+                        </h:panelGrid>
 
-                <p:commandButton value="Registrar" icon="ui-icon-check" update="output" oncomplete="PF('dlg').show()" />
+                        <p:commandButton id="cb_registrar" value="Registrar" icon="ui-icon-check" update="output" oncomplete="PF('dlg').show()" />
 
-                <p:dialog header="Datos del Empleado" resizable="false" showEffect="fade" widgetVar="dlg">
-                    <p:panelGrid id="output" columns="2" columnClasses="label, value">
-                        <h:outputText value="Nombre" />
-                        <h:outputText value="Cristhian José" />
+                        <p:dialog header="Datos del Empleado" resizable="false" showEffect="fade" widgetVar="dlg">
+                            <p:panelGrid id="output" columns="2" columnClasses="label, value">
+                                <h:outputText value="Nombre" />
+                                <h:outputText value="Cristhian José" />
 
-                        <h:outputText value="Apellido" />
-                        <h:outputText value="Ponguillo Arreaga" />
-                        
-                        <h:outputText value="Cedula" />
-                        <h:outputText value="0930561022" />
-                        
-                        <h:outputText value="Dirección" />
-                        <h:outputText value="Cdla.Orquideas Mz:60 V:31" />
-                        
-                        <h:outputText value="Teléfono" />
-                        <h:outputText value="0988300843" />
-                        
-                        <h:outputText value="Rol" />
-                        <h:outputText value="Doctor" />
-                        
-                        <h:outputText value="Usuario" />
-                        <h:outputText value="cjpongui" />
-                        
-                                              
-                    </p:panelGrid>
-                </p:dialog>
-            </h:form>
-            
+                                <h:outputText value="Apellido" />
+                                <h:outputText value="Ponguillo Arreaga" />
+
+                                <h:outputText value="Cedula" />
+                                <h:outputText value="0930561022" />
+
+                                <h:outputText value="Dirección" />
+                                <h:outputText value="Cdla.Orquideas Mz:60 V:31" />
+
+                                <h:outputText value="Teléfono" />
+                                <h:outputText value="0988300843" />
+
+                                <h:outputText value="Rol" />
+                                <h:outputText value="Doctor" />
+
+                                <h:outputText value="Usuario" />
+                                <h:outputText value="cjpongui" />
+
+
+                            </p:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                </div>            
+            </div>
         </div>
         <div id="panel-background-footer" class="panel-container">
             <div id="panel-inner-footer">
