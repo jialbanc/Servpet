@@ -10,7 +10,8 @@
         <link rel="stylesheet" href="css/index_style.css"/>
         <link rel="stylesheet" href="css/home_style.css"/>
     </h:head>
-    <h:body>
+    <h:body> 
+        
         <div id="panel-background1" class="panel-container">
             <div id="panel-container-header">
                 <div id="panel-container-logo">
@@ -36,16 +37,9 @@
                         </p:menuitem>
                         <p:menuitem value="Registro" url="registro.xhtml" icon="ui-icon-document">
                         </p:menuitem>
-                        <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
+                        <p:menuitem value="Historial" url="/admin/historial.xhtml" icon="ui-icon-document">
                         
                         </p:menuitem>
-                        
-                        <p:submenu label="Opciones" icon="ui-icon-wrench">
-                            <p:menuitem value="Cuenta" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
-                            <p:menuitem value="Mensajes" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-mail-closed" />
-                            <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
-                        </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                         </f:facet>
