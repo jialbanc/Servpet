@@ -1,0 +1,5 @@
+WEB-INF/view/
+WEB-INF/view/jsp/
+WEB-INF/view/jsp/default/
+WEB-INF/view/jsp/default/ui/
+WEB-INF/lib/postgresql-9.3-1101-jdbc41.jar
