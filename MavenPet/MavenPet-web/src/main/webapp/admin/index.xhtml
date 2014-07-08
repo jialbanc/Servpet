@@ -20,24 +20,29 @@
                 <div id="menu-top" class="nav-bar">
                     <h:form id="form_menutop">
                         <p:commandLink value="Home" action="/"></p:commandLink>
-                        <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
                         <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
-                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
                     </h:form>
                 </div>
                 <div id="panel-refill"></div>
                 <h:form id="form">  
                     <p:growl id="messages"/>
                     <p:menubar id="menu">
-                        <p:menuitem value="Home" url="/" icon="ui-icon-home">
+                        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home">
                         </p:menuitem>
-                        <p:menuitem value="Galeria" icon="ui-icon-search">
+                        <p:menuitem value="Galeria" url="galeria.xhtml" icon="ui-icon-search">
                         </p:menuitem>
                         <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
                         </p:menuitem>
                         <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
-                        
                         </p:menuitem>
+                        <p:menuitem value="Contáctenos" url="contactenos.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:submenu label="Opciones" icon="ui-icon-wrench">
+                            <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
+                            <p:separator />
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                        </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                         </f:facet>

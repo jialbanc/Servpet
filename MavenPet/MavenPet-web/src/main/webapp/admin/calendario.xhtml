@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+
+    <h:head>
+        <title>SERVPET Calendario de Citas</title>
+        <link rel="stylesheet" href="../css/index_style.css"/>
+        <link rel="stylesheet" href="../css/calendar_style.css"/>
+    </h:head>
+    <h:body>
+        <div id="panel-background1" class="panel-container">
+            <div id="panel-container-header">
+                <div id="panel-container-logo">
+                    <p:graphicImage value="../images/logo.png" id="image-logo" />
+                </div>
+                <div id="menu-top" class="nav-bar">
+                    <h:form id="form_menutop">
+                        <p:commandLink value="Home" action="/"></p:commandLink>
+                        <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
+                        <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                    </h:form>
+                </div>
+                <div id="panel-refill"></div>
+                <h:form id="form">  
+                    <p:growl id="messages"/>
+                    <p:menubar id="menu">
+                        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home">
+                        </p:menuitem>
+                        <p:menuitem value="Galeria" url="galeria.xhtml" icon="ui-icon-search">
+                        </p:menuitem>
+                        <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Contáctenos" url="contactenos.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:submenu label="Opciones" icon="ui-icon-wrench">
+                            <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
+                            <p:separator />
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                        </p:submenu>
+                        <f:facet name="options">
+                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+            
+            <div id='panel-container-body' >
+                <div id="panel-container-links">
+                    <h:form id="form_2">
+                    <p:commandLink value="Home" action="index.xhtml"></p:commandLink> -
+                    <p:commandLink value="Calendario" action="calendario.xhtml"></p:commandLink>
+                    </h:form>
+                </div>
+                <p:outputLabel id="label-calendar-title" value="Calendario de Citas" />
+                <div id="panel-container-calendar">
+                    <h:form id="form_1">
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:schedule id="schedule" value="#{scheduleController.eventModel}" widgetVar="myschedule" locale="es">
+
+                            <p:ajax event="dateSelect" listener="#{scheduleController.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show()" />
+                            <p:ajax event="eventSelect" listener="#{scheduleController.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show()" />
+                            <p:ajax event="eventMove" listener="#{scheduleController.onEventMove}" update="messages" />
+                            <p:ajax event="eventResize" listener="#{scheduleController.onEventResize}" update="messages" />
+
+                        </p:schedule>
+
+                        <p:dialog widgetVar="eventDialog" header="Detalle de la cita" showEffect="fade" hideEffect="clip" resizable="false">
+                            <h:panelGrid id="eventDetails" columns="2">
+                                <h:outputLabel for="title" value="Título:" />
+                                <p:inputText id="title" value="#{scheduleController.event.title}" required="true"/>
+
+                                <h:outputLabel for="from" value="Desde:" />
+                                <p:calendar required="true" locale="es" showButtonPanel="true" id="from" value="#{scheduleController.event.startDate}" pattern="MM/dd/yyyy HH:mm" />                    
+
+                                <h:outputLabel for="to" value="Hasta:" />
+                                <p:calendar required="true" locale="es" showButtonPanel="true" id="to" value="#{scheduleController.event.endDate}" pattern="MM/dd/yyyy HH:mm" />
+
+                                <h:outputLabel for="allDay" value="¿Todo el día?" />
+                                <h:selectBooleanCheckbox id="allDay" value="#{scheduleController.event.allDay}" />
+
+                                <p:commandButton type="reset" value="Cancelar" />
+                                <p:commandButton id="addButton" value="Guardar" actionListener="#{scheduleController.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>
+                            </h:panelGrid>
+                        </p:dialog>
+
+                    </h:form>
+                </div>
+            </div>
+            
+        </div>
+        <div id="panel-background2" class="panel-container">
+            
+            <div id="panel-refill"></div>
+        </div>
+        <div id="panel-background-footer" class="panel-container">
+            <div id="panel-inner-footer">
+                <p:outputLabel id="label-footer" value="DIVIERTASE Y APRENDA" />
+
+            </div>
+            <div id="panel-footer-twitter">
+                <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
+                <a class="twitter-timeline" href="https://twitter.com/eluniversocom" data-widget-id="477981204549861376">Tweets por @eluniversocom</a>
+                <script>!function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = p + "://platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    }(document, "script", "twitter-wjs");</script>
+
+
+            </div>
+            <div id="panel-footer-contact">
+                <p:outputLabel id="label-footer-contact" value="CONTÁCTENOS" />
+            </div>
+            <div id="panel-footer-location">
+                <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
+                <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
+                        width="90%" height="110%" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+    </h:body>
+
+    <script type="text/javascript">
+PrimeFaces.locales['es'] = {
+            closeText: 'Registrar',
+            prevText: 'Anterior',
+            nextText: 'Próximo',
+            currentText: 'Actual',
+            monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun', 'Jul','Ago','Sep','Oct','Nov','Dic'],
+            dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+            dayNamesShort: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+            dayNamesMin: ['D','L','M','M','J','V','S'],
+            weekHeader: 'Semana',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: '',
+            timeOnlyTitle: 'Sólo horas',
+            timeText: 'Tiempo',
+            hourText: 'Hora',
+            minuteText: 'Minuto',
+            secondText: 'Segundo',            
+            ampm: false,
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            allDayText : 'Todo el día'
+        };
+    </script>
+</html>
+

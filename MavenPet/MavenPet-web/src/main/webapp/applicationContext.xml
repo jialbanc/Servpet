@@ -12,11 +12,6 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
     
     <sec:http use-expressions="true">
-        <!--
-      <sec:intercept-url pattern="/login*" access="permitAll" />
-      <sec:intercept-url pattern="/**" access="permitAll"/>
-      
-      -->
       <sec:intercept-url pattern="/redirect.xhtml" access="permitAll" />
       <sec:intercept-url pattern="/**" access="authentication" />
       <sec:form-login
@@ -61,13 +56,13 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="accessDecisionManager" ref="httpRequestAccessDecisionManager"/>
         <property name="securityMetadataSource">
             <sec:filter-invocation-definition-source>
-                <!--roles
-                <sec:intercept-url pattern="/secure/extreme/**" access="ROLE_SUPERVISOR"/>
-                <sec:intercept-url pattern="/secure/**" access="ROLE_USER"/>
-                <sec:intercept-url pattern="/**" access="ROLE_USER"/>
-           --> 
-                <sec:intercept-url pattern="/secure/admin/**" access="ROLE_SUPERVISOR"/>
-                <sec:intercept-url pattern="/**" access="ROLE_USER"/>
+                <sec:intercept-url pattern="/javax.faces.resource/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
+                <sec:intercept-url pattern="/images/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
+                <sec:intercept-url pattern="/css/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
+                <sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
+                <sec:intercept-url pattern="/employee/**" access="ROLE_EMPLOYEE"/>
+                <sec:intercept-url pattern="/doctor/**" access="ROLE_DOCTOR"/>
+                <sec:intercept-url pattern="/**" access="ROLE_CLIENT"/>
                 
             </sec:filter-invocation-definition-source>
         </property>
@@ -115,16 +110,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
             </list>
         </property>
     </bean>
-    <!--
-    <sec:user-service id="userService">
-        <sec:user name="admin" password="123" authorities="ROLE_USER,ROLE_SUPERVISOR" />
-        <sec:user name="user" password="user" authorities="ROLE_USER" />
-        
-    </sec:user-service>
-     -->
- 
-    
-    
+
     
      <bean id="j2eePreAuthFilter" class="org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter">
         <property name="authenticationManager" ref="authenticationManager"/>

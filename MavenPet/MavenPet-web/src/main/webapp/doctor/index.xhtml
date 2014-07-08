@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>SERVPET</title>
+        <link rel="stylesheet" href="../css/index_style.css"/>
+        <link rel="stylesheet" href="../css/home_style.css"/>
+    </h:head>
+    <h:body> 
+        
+        <div id="panel-background1" class="panel-container">
+            <div id="panel-container-header">
+                <div id="panel-container-logo">
+                    <p:graphicImage value="../images/logo.png" id="image-logo" />
+                </div>
+                <div id="menu-top" class="nav-bar">
+                    <h:form id="form_menutop">
+                        <p:commandLink value="Home" action="/"></p:commandLink>
+                        <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
+                        <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                    </h:form>
+                </div>
+                <div id="panel-refill"></div>
+                <h:form id="form">  
+                    <p:growl id="messages"/>
+                    <p:menubar id="menu">
+                        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home">
+                        </p:menuitem>
+                        <p:menuitem value="Galeria" url="galeria.xhtml" icon="ui-icon-search">
+                        </p:menuitem>
+                        <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:submenu label="Opciones" icon="ui-icon-wrench">
+                            <p:menuitem value="Cuenta"  update="messages" icon="ui-icon-contact" />
+                            <p:separator />
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                        </p:submenu>
+                        <f:facet name="options">
+                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </div>
+            <div id="panel-contariner-slider">
+                <p:imageSwitch effect="fade" id="fadeEffect">
+                    <ui:repeat value="#{imagesView.images}" var="image" id="fadeEffectImages">
+                        <p:graphicImage value="images/#{image}" id="image" />
+                    </ui:repeat>
+                </p:imageSwitch>
+            </div>
+        </div>
+        <div id="panel-background2" class="panel-container">
+            <div id='panel-container-rehome' >
+                <p:outputLabel id="label-rehome" value="REHOME" />
+                <p:panelGrid id="gridImage" columns="2" >
+                    <p:graphicImage value="images/images2.jpg" id="image1" />
+                    <p:graphicImage value="images/images3.jpg" id="image2" />
+                    <p:graphicImage value="images/images4.jpg" id="image3" />
+                    <p:graphicImage value="images/images5.jpg" id="image4" />
+                    <p:graphicImage value="images/images2.jpg" id="image5" />
+                    <p:graphicImage value="images/images4.jpg" id="image6" />
+                </p:panelGrid>
+            </div>
+            <div id="panel-container-noticias">
+                <div id="panel-container-tag">
+                    <p:outputLabel id="label-tag" value="ULTIMAS NOTICIAS" />
+                </div> 
+            </div>
+            <div id="panel-refill"></div>
+        </div>
+        <div id="panel-background-footer" class="panel-container">
+            <div id="panel-inner-footer">
+                <p:outputLabel id="label-footer" value="DIVIERTASE Y APRENDA" />
+
+            </div>
+            <div id="panel-footer-twitter">
+                <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
+                <a class="twitter-timeline" href="https://twitter.com/ServPetCRM" data-widget-id="481815012780937216">Tweets por @ServPetCRM</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js"
+                    ;fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+            </div>
+            <div id="panel-footer-contact">
+                <p:outputLabel id="label-footer-contact" value="CONTÁCTENOS" />
+            </div>
+            <div id="panel-footer-location">
+                <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
+                <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
+                        width="90%" height="110%" frameborder="0" style="border:0"></iframe>
+            </div>
+        </div>
+    </h:body>   
+</html>
+
