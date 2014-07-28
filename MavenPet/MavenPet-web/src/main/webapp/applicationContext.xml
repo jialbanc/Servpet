@@ -56,6 +56,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <property name="accessDecisionManager" ref="httpRequestAccessDecisionManager"/>
         <property name="securityMetadataSource">
             <sec:filter-invocation-definition-source>
+                
+                <sec:intercept-url pattern="/" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
                 <sec:intercept-url pattern="/javax.faces.resource/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
                 <sec:intercept-url pattern="/images/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
                 <sec:intercept-url pattern="/css/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>

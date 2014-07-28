@@ -49,6 +49,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
         <property name="securityMetadataSource">
             <sec:filter-invocation-definition-source >
                 
+                <sec:intercept-url pattern="/index.xhtml" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
                 <sec:intercept-url pattern="/javax.faces.resource/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
                 <sec:intercept-url pattern="/images/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
                 <sec:intercept-url pattern="/css/**" access="ROLE_ADMIN,ROLE_EMPLOYEE,ROLE_CLIENT,ROLE_DOCTOR"/>
