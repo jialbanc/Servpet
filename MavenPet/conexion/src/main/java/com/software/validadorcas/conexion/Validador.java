@@ -19,7 +19,7 @@ public class Validador extends AbstractUsernamePasswordAuthenticationHandler {
         String username = credentials.getUsername();  
         String password = credentials.getPassword(); 
         boolean valid = false; 
-        String statementPostgrasql = "select * from \"usuario\" where usua = '"+username+"' and password = '"+password+"'";
+        String statementPostgrasql = "select * from \"usuario\" where cedula = '"+username+"' and password = '"+password+"'";
             
         /*Connection con = null;  
         Statement sta = null;  
