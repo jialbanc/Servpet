@@ -17,7 +17,7 @@ public class ConexionPSql {
     private final String url = "jdbc:postgresql://";
     private final String serverName = "localhost";
     private final String portNumber = "5432";
-    private final String databaseName = "veterinaria";
+    private final String databaseName = "postgres";
     private final String userName = "postgres";
     private final String password = "admin";
         
@@ -61,10 +61,10 @@ public class ConexionPSql {
                 return connection;
         }
         public static void main(String[] args) throws Exception {
-          /*String username="hola";
-            String password="mundo";
-            String statementSQL = "select * from usuario where usua = '"+username+"' and password = '"+password+"'";
-            String statementPostgrasql = "select * from \"usuario\" where usua = '"+username+"' and password = '"+password+"'";
+         /* String username="920818184";
+            String password="cjpongui";
+            String statementSQL = "select * from usuario where cedula = '"+username+"' and password = '"+password+"'";
+            String statementPostgrasql = "select * from \"usuario\" where cedula = '"+username+"' and password = '"+password+"'";
             ConexionPSql myDbTest = new ConexionPSql();
                 
             Statement select = myDbTest.getConnection().createStatement();
@@ -72,7 +72,7 @@ public class ConexionPSql {
                                
                 while (result.next()) {
                         System.out.println("Usuario1: " + result.getString(1) + "\n");
-                        System.out.println("Password: " + result.getString(2) + "\n");
+                        System.out.println("Password: " + result.getString(5) + "\n");
                 }*/
         }
 }
