@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>SERVPET</title>
         <link rel="stylesheet" href="../css/index_style.css"/>
@@ -51,56 +52,51 @@
             </div>
         </div>
             <h:form id="historial"> 
-                <p:dataScroller value="#{dataScrollerView.cars}" var="car" chunkSize="10" scrollHeight="500" mode="inline">
+                ASd
+                <h:outputText value="#{registroManagedBean.ltUsuarios.size}"/>
+                ASD
+                <br/>
+                <p:dataScroller value="#{registroManagedBean.ltUsuarios}" var="usuario" chunkSize="5" scrollHeight="500" mode="inline">
                     <f:facet name="header">
                        Notificaciones
                     </f:facet>
-                     <h:panelGrid columns="2" cellpadding="5" >
-                                <p:outputLabel value="Buscar" for="acBuscar" />
-                                <p:autoComplete id="acBuscar" value="0912459519"/>
-                    </h:panelGrid>
+                    
                     <h:panelGrid columns="4" style="width:100%" columnClasses="logo,detail">
                     <!-- FALTA ARREGLAR LA CLASE CAR QUE CONTIENE LOS DATOS EXTRAIDO DE LAS BASE-->
-                       
-                    <div id="cliente">
-                         <p:graphicImage value="../images/perrito1.jpg" /> 
-                    </div>
                         <p:outputPanel>
                             <h:panelGrid columns="2" cellpadding="5">
-                                <h:outputText value="Id:" />
-                                <h:outputText value="0912459519" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Nombre del Dueño:" />
-                                <h:outputText value="Juan Gómez" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Nombre de la mascota:" />
-                                <h:outputText value="Pepito" style="font-weight: bold"/>
+                                    <h:outputText value="Id:" />
+                                    <h:outputText value="#{usuario.cedula}" style="font-weight: bold"/>
 
-                                <h:outputText value="Year:" />
-                                <h:outputText value="2008" style="font-weight: bold"/>
+                                    <h:outputText value="Nombre del Dueño:" />
+                                    <h:outputText value="#{usuario.apellido}" style="font-weight: bold"/>
 
-                                <h:outputText value="Color:" />
-                                <h:outputText value="Marrón" style="font-weight: bold"/>
+                                    <h:outputText value="Nombre de la mascota:" />
+                                    <h:outputText value="Pepito" style="font-weight: bold"/>
+
+                                    <h:outputText value="Year:" />
+                                    <h:outputText value="2008" style="font-weight: bold"/>
+
+                                    <h:outputText value="Color:" />
+                                    <h:outputText value="Marrón" style="font-weight: bold"/>
+
+                                    <h:outputText value="Raza:" />
+                                    <h:outputText value="Golden Retriever" style="font-weight: bold"/>
+
+                                    <h:outputText value="Enfermedades:" />
+                                    <h:outputText value="Ninguna" style="font-weight: bold"/>
+
+                                    <h:outputText value="Vitaminas:" />
+                                    <h:outputText value="Complejo B" style="font-weight: bold"/>
+
+                                    <h:outputText value="Últimas vacunas:" />
+                                    <h:outputText value="02/01/2014" style="font-weight: bold"/>
+
+                                    <h:outputText value="Observaciones:" />
+                                    <h:outputText value="Presenta un pequeño enrojecimiento en su pierna derecha" style="font-weight: bold"/>
                                 
-                                <h:outputText value="Raza:" />
-                                <h:outputText value="Golden Retriever" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Enfermedades:" />
-                                <h:outputText value="Ninguna" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Vitaminas:" />
-                                <h:outputText value="Complejo B" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Últimas vacunas:" />
-                                <h:outputText value="02/01/2014" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Observaciones:" />
-                                <h:outputText value="Presenta un pequeño enrojecimiento en su pierna derecha" style="font-weight: bold"/>
                             </h:panelGrid>
-                            
-                        </p:outputPanel>
-                    
-                                       
+                        </p:outputPanel>         
                      </h:panelGrid>
                 </p:dataScroller>
             </h:form>
