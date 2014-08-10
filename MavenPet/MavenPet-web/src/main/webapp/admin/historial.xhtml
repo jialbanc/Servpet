@@ -22,7 +22,7 @@
                         <p:commandLink value="Home" action="index.xhtml"></p:commandLink>
                         <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
                         <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
-                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
                     </h:form>
                 </div>
                 <div id="panel-refill"></div>
@@ -42,7 +42,7 @@
                         <p:submenu label="Opciones" icon="ui-icon-wrench">
                             <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
                             <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
                         </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
@@ -52,10 +52,6 @@
             </div>
         </div>
             <h:form id="historial"> 
-                ASd
-                <h:outputText value="#{registroManagedBean.ltUsuarios.size}"/>
-                ASD
-                <br/>
                 <p:dataScroller value="#{registroManagedBean.ltUsuarios}" var="usuario" chunkSize="5" scrollHeight="500" mode="inline">
                     <f:facet name="header">
                        Notificaciones
