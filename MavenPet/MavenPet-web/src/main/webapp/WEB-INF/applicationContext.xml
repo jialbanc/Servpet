@@ -37,7 +37,22 @@
     <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider ref="preAuthAuthProvider"/>
     </sec:authentication-manager>
-
+    
+    <bean id="preAuthAuthProvider" class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+        <property name="preAuthenticatedUserDetailsService">
+            <bean id="userDetailsServiceWrapper" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+                <property name="userDetailsService" ref="userService"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="j2eePreAuthFilter" class="org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationDetailsSource">
+            <bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource" />
+        </property>
+    </bean>
+    
     <bean id="springSecurityFilterChain" class="org.springframework.security.web.FilterChainProxy">
         <sec:filter-chain-map path-type="ant">
             <sec:filter-chain pattern="/" filters="casValidationFilter, wrappingFilter" />
@@ -77,27 +92,13 @@
         </property>
     </bean>
     
-    
-    
     <bean id="servletContext" class="org.springframework.web.context.support.ServletContextFactoryBean"/>
     
     <bean id="etf" class="org.springframework.security.web.access.ExceptionTranslationFilter">
         <property name="authenticationEntryPoint" ref="preAuthEntryPoint"/>
     </bean>
-
     
-    
-    
-    
-    <bean id="preAuthAuthProvider" class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
-        <property name="preAuthenticatedUserDetailsService">
-            <bean id="userDetailsServiceWrapper" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
-                <property name="userDetailsService" ref="userService"/>
-            </bean>
-        </property>
-    </bean>
-    
-    <bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter"/>
+    <bean id="preAuthEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
     
     <bean id="httpRequestAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
         <property name="allowIfAllAbstainDecisions" value="false"/>
@@ -108,6 +109,8 @@
         </property>
     </bean>
     
+    <bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter"/>
+    
     <sec:user-service properties="WEB-INF/users.properties" id="userService"></sec:user-service>
     <!--
     <sec:authentication-manager alias="authenticationManager">
@@ -116,14 +119,5 @@
         </sec:authentication-provider>
     </sec:authentication-manager>
     -->
-     <bean id="j2eePreAuthFilter" class="org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter">
-        <property name="authenticationManager" ref="authenticationManager"/>
-        <property name="authenticationDetailsSource">
-            <bean class="org.springframework.security.web.authentication.WebAuthenticationDetailsSource" />
-        </property>
-    </bean>
-    
-    <bean id="preAuthEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
-    
     
 </beans>
