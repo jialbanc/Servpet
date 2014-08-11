@@ -29,19 +29,20 @@
                 <h:form id="form">  
                     <p:growl id="messages"/>
                     <p:menubar id="menu">
-                        <p:menuitem value="Home" url="/" icon="ui-icon-home">
+                        <p:menuitem value="Home" url="/" icon="ui-icon-home" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Galeria" icon="ui-icon-search">
+                        <p:menuitem value="Galeria" url="/#{rolManagedBean.currentUserRol}/galeria.xhtml" icon="ui-icon-search" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
+                        <p:menuitem value="Calendario" url="/#{rolManagedBean.currentUserRol}/calendario.xhtml" icon="ui-icon-document" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Registro" url="registro.xhtml" icon="ui-icon-document">
+                        <p:menuitem value="Historial" url="/#{rolManagedBean.currentUserRol}/historial.xhtml" icon="ui-icon-document" rendered="#{rolManagedBean.historialIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Historial" url="/admin/historial.xhtml" icon="ui-icon-document">
-                        
+                        <p:menuitem value="Notificaciones" url="/#{rolManagedBean.currentUserRol}/notificaciones.xhtml" icon="ui-icon-document" rendered="#{rolManagedBean.notificacionesIsRendering()}">
+                        </p:menuitem>
+                        <p:menuitem value="Contactenos" url="/#{rolManagedBean.currentUserRol}/contactenos.xhtml" icon="ui-icon-document" rendered="#{rolManagedBean.contactenosIsRendering()}">
                         </p:menuitem>
                         <p:submenu label="Opciones" icon="ui-icon-wrench">
-                            <p:menuitem value="#{userBean.name}" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
+                            <p:menuitem value="#{rolManagedBean.currentUser}" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
                             <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
                             <p:separator />
                             <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
@@ -62,7 +63,7 @@
         </div>
         <div id="panel-background2" class="panel-container">
             <div id='panel-container-rehome' >
-                <p:outputLabel id="label-rehome" value="REHOME" />
+                <p:outputLabel id="label-rehome" value="REHOME#{userBean.name}" />
                 <p:panelGrid id="gridImage" columns="2" >
                     <p:graphicImage value="images/images2.jpg" id="image1" />
                     <p:graphicImage value="images/images3.jpg" id="image2" />

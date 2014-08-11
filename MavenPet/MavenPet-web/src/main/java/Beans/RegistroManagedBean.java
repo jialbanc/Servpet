@@ -8,12 +8,14 @@ package Beans;
 
 import Entities.Usuario;
 import Facades.UsuarioFacade;
+import Facades.UsuarioFacadeLocal;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -26,6 +28,7 @@ public class RegistroManagedBean {
     @EJB
     private Facades.UsuarioFacadeLocal usuarioFacade;    
     private List<Entities.Usuario> ltUsuarios ;
+    private String currentUser;
     /**
      * Creates a new instance of RegistroManagedBean
      */
@@ -35,6 +38,23 @@ public class RegistroManagedBean {
     @PostConstruct
     public void init(){
         ltUsuarios = usuarioFacade.findAll();
+        currentUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+    }
+    
+    public UsuarioFacadeLocal getUsuarioFacade() {
+        return usuarioFacade;
+    }
+
+    public void setUsuarioFacade(UsuarioFacadeLocal usuarioFacade) {
+        this.usuarioFacade = usuarioFacade;
+    }
+
+    public String getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.currentUser = currentUser;
     }
     
     public List<Usuario> getLtUsuarios() {

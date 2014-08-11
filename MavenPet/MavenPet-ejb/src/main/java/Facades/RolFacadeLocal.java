@@ -31,4 +31,6 @@ public interface RolFacadeLocal {
 
     int count();
     
+    String getRolByUser(String User);
+    
 }

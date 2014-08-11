@@ -34,6 +34,8 @@
     <bean id="wrappingFilter" class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter" /> 
     <bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
     
+    <sec:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
+    
     <sec:authentication-manager alias="authenticationManager">
         <sec:authentication-provider ref="preAuthAuthProvider"/>
     </sec:authentication-manager>
@@ -87,7 +89,7 @@
                 <sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
                 <sec:intercept-url pattern="/employee/**" access="ROLE_EMPLOYEE"/>
                 <sec:intercept-url pattern="/doctor/**" access="ROLE_DOCTOR"/>
-                <sec:intercept-url pattern="/**" access="ROLE_CLIENT"/>
+                <sec:intercept-url pattern="/**" access="ROLE_ADMIN"/>
             </sec:filter-invocation-definition-source>
         </property>
     </bean>

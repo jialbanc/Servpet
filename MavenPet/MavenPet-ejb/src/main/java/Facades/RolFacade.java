@@ -29,4 +29,9 @@ public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
         super(Rol.class);
     }
     
+    @Override
+    public String getRolByUser(String User){
+        return em.createNamedQuery("Rol.findByIdusuario").setParameter("idusuario",User).getSingleResult().toString();
+    }
+    
 }
