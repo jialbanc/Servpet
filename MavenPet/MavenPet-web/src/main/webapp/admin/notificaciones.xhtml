@@ -21,7 +21,7 @@
                         <p:commandLink value="Home" action="index.xhtml"></p:commandLink>
                         <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
                         <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
-                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://hp:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
                     </h:form>
                 </div>
                 <div id="panel-refill"></div>
@@ -41,7 +41,7 @@
                         <p:submenu label="Opciones" icon="ui-icon-wrench">
                             <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
                             <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
                         </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
@@ -50,45 +50,33 @@
                 </h:form>
             </div>
         </div>
-            <h:form id="historial"> 
-                <p:dataScroller value="#{dataScrollerView.cars}" var="car" chunkSize="10" scrollHeight="500" mode="inline">
+        <h:form id="form_notificaciones">
+        <p:dataTable  styleClass="TablaHistorial" var="cita" value="#{notificacionesManagedBean.ltCitas}" widgetVar="historialTable" emptyMessage="No se ha encontrado ningun dato" filteredValue="#{historialManagedBean.usuariosfiltrados}">
                     <f:facet name="header">
-                       Historial de Clientes
-                    </f:facet>
-                     <h:panelGrid columns="2" cellpadding="5" >
-                                <p:outputLabel value="Buscar" for="acBuscar" />
-                                <p:autoComplete id="acBuscar" value="0912459519"/>
-                    </h:panelGrid>
-                    <h:panelGrid columns="4" style="width:100%" columnClasses="logo,detail">
-                        <div id="cliente">
-                            <p:graphicImage value="../images/notificaciones.jpg"/>
-                         </div>
                         <p:outputPanel>
-                            <h:panelGrid columns="2" cellpadding="5" >
-                                <h:outputText value="Empleado:" />
-                                <h:outputText value="jbanchon" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Cédula del cliente:" />
-                                <h:outputText value="0912459519" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Nombre del cliente:" />
-                                <h:outputText value="Juan Gómez" style="font-weight: bold"/>
-                                
-                                 <h:outputText value="E-mail:" />
-                                <h:outputText value="juangomez@correo.com" style="font-weight: bold"/>
-                                
-                                <h:outputText value="Nombre de la mascota:" />
-                                <h:outputText value="Pepito" style="font-weight: bold"/>
-                     
-                                <h:outputText value="Mensaje:" />
-                                <h:outputText value="Buenas Tardes, por favor recoger a su mascota a las 16h00 del día 06 de Julio del 2014. Adjunto una foto de su baño y corte de pelo." style="font-weight: bold"/>
-                            </h:panelGrid>
-                            
+                            <h:outputText value="Buscar:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
                         </p:outputPanel>
+                    </f:facet>        
+            
+                
+            
+            <p:column filterBy="#{cita.idmascota.nombre}" headerText="Cedula Cliente"  filterMatchMode="contains">
+                        <h:outputText value="#{cita.idmascota.nombre}"  />
+                    </p:column>
+
+                    <p:column filterBy="" headerText="Nombre Cliente"  filterMatchMode="contains">
+                        <h:outputText value=""  />
+                    </p:column>
+            
+                     <p:column filterBy="" headerText="E-mail Cliente"  filterMatchMode="contains">
+                         <h:outputText value=""  />
+                    </p:column>
+
                     
-                                       
-                     </h:panelGrid>
-                </p:dataScroller>
+
+                     
+                </p:dataTable>
             </h:form>
         <div id="panel-background-footer" class="panel-container">
             

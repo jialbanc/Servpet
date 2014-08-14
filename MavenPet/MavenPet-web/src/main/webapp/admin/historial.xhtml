@@ -4,29 +4,29 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>SERVPET</title>
         <link rel="stylesheet" href="../css/index_style.css"/>
         <link rel="stylesheet" href="../css/historial.css"/>
     </h:head>
     <h:body>
-        <div id="panel-background1" class="panel-container">
-            <div id="panel-container-header">
-                <div id="panel-container-logo">
-                    <p:graphicImage value="../images/logo.png" id="image-logo" />
-                </div>
-                <div id="menu-top" class="nav-bar">
-                    <h:form id="form_menutop">
+        <h:form id="form">
+            <div id="panel-background1" class="panel-container">
+                <div id="panel-container-header">
+                    <div id="panel-container-logo">
+                        <p:graphicImage value="../images/logo.png" id="image-logo" />
+                    </div>
+                    <div id="menu-top" class="nav-bar">
+
                         <p:commandLink value="Home" action="index.xhtml"></p:commandLink>
                         <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
                         <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
                         <p:commandLink value="Cerrar Sesión" target="_self" action="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
-                    </h:form>
-                </div>
-                <div id="panel-refill"></div>
-                <h:form id="form">  
+
+                    </div>
+                    <div id="panel-refill"></div>
+
                     <p:growl id="messages"/>
                     <p:menubar id="menu">
                         <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home">
@@ -48,81 +48,99 @@
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                         </f:facet>
                     </p:menubar>
-                </h:form>
+
+                </div>
             </div>
-        </div>
-            <h:form id="historial"> 
-                <p:dataScroller value="#{registroManagedBean.ltUsuarios}" var="usuario" chunkSize="5" scrollHeight="500" mode="inline">
+            <!--<p:growl id="msgs" showDetail="true"/>-->
+            <p:dataTable  styleClass="TablaHistorial" rowStyleClass="TablaHistorialfila,TablaHistorialColumn" var="mascota" value="#{historialManagedBean.ltmascotas}" widgetVar="historialTable" emptyMessage="No se ha encontrado ningun dato" filteredValue="#{historialManagedBean.usuariosfiltrados}">
                     <f:facet name="header">
-                       Notificaciones
+                        <p:outputPanel>
+                            <h:outputText value="Buscar:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
+                        </p:outputPanel>
                     </f:facet>
                     
-                    <h:panelGrid columns="4" style="width:100%" columnClasses="logo,detail">
-                    <!-- FALTA ARREGLAR LA CLASE CAR QUE CONTIENE LOS DATOS EXTRAIDO DE LAS BASE-->
-                        <p:outputPanel>
-                            <h:panelGrid columns="2" cellpadding="5">
-                                    <h:outputText value="Id:" />
-                                    <h:outputText value="#{usuario.cedula}" style="font-weight: bold"/>
+                <!--<p:ajax event="rowEdit" listener="#{historialManagedBean.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{historialManagedBean.onRowEdit}" update=":form:msgs" />-->
+                
+                <p:column filterBy="#{mascota.idusuario}" headerText="Id"  filterMatchMode="contains">
+                    <h:outputText value="#{mascota.idusuario.cedula}"  />
+                </p:column>
 
-                                    <h:outputText value="Nombre del Dueño:" />
-                                    <h:outputText value="#{usuario.apellido}" style="font-weight: bold"/>
+                <p:column  headerText="Cliente"  filterMatchMode="contains">
+                    <h:outputText value="#{mascota.idusuario.nombre}"  />
+                </p:column>
 
-                                    <h:outputText value="Nombre de la mascota:" />
-                                    <h:outputText value="Pepito" style="font-weight: bold"/>
+                    <p:column headerText="Mascota"  filterMatchMode="contains">                                 
+                             <h:outputText value="#{mascota.nombre}"  />
+                             <br></br>
+                    </p:column>
 
-                                    <h:outputText value="Year:" />
-                                    <h:outputText value="2008" style="font-weight: bold"/>
+                     <p:column  headerText="Raza"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.raza}"  />
+                            <br></br>
+                    </p:column>
 
-                                    <h:outputText value="Color:" />
-                                    <h:outputText value="Marrón" style="font-weight: bold"/>
+                    <p:column  headerText="Edad"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.edad}"  />
+                            <br></br>
+                    </p:column>
 
-                                    <h:outputText value="Raza:" />
-                                    <h:outputText value="Golden Retriever" style="font-weight: bold"/>
+                    <p:column  headerText="Sexo"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.sexo}"  />
+                            <br></br>
+                    </p:column>
 
-                                    <h:outputText value="Enfermedades:" />
-                                    <h:outputText value="Ninguna" style="font-weight: bold"/>
+                    <p:column  headerText="Enfermedades"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.enfermedades}"  />
+                            <br></br>
+                    </p:column>
+                    <p:column  headerText="Vacunas"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.vacunas}"  />
+                            <br></br>
+                    </p:column>
+                    <p:column  headerText="Medicinas"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.medicinas}"  />
+                            <br></br>
+                    </p:column>
+                    <p:column  headerText="Observaciones"  filterMatchMode="contains">
+                            <h:outputText value="#{mascota.observaciones}"  />
+                            <br></br>
+                    </p:column>
+                    
+                    <p:column style="width:32px">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            <div id="panel-background-footer" class="panel-container">
 
-                                    <h:outputText value="Vitaminas:" />
-                                    <h:outputText value="Complejo B" style="font-weight: bold"/>
-
-                                    <h:outputText value="Últimas vacunas:" />
-                                    <h:outputText value="02/01/2014" style="font-weight: bold"/>
-
-                                    <h:outputText value="Observaciones:" />
-                                    <h:outputText value="Presenta un pequeño enrojecimiento en su pierna derecha" style="font-weight: bold"/>
-                                
-                            </h:panelGrid>
-                        </p:outputPanel>         
-                     </h:panelGrid>
-                </p:dataScroller>
-            </h:form>
-        <div id="panel-background-footer" class="panel-container">
-            
-            <div id="panel-footer-twitter">
-                <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
-                <a class="twitter-timeline" href="https://twitter.com/ServPetCRM" data-widget-id="477981204549861376">Tweets por @eluniversocom</a>
-                <script>!function(d, s, id) {
-                        var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
-                        if (!d.getElementById(id)) {
-                            js = d.createElement(s);
-                            js.id = id;
-                            js.src = p + "://platform.twitter.com/widgets.js";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }
-                    }(document, "script", "twitter-wjs");</script>
+                <div id="panel-footer-twitter">
+                    <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
+                    <a class="twitter-timeline" href="https://twitter.com/ServPetCRM" data-widget-id="477981204549861376">Tweets por @eluniversocom</a>
+                    <script>!function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                            if (!d.getElementById(id)) {
+                                js = d.createElement(s);
+                                js.id = id;
+                                js.src = p + "://platform.twitter.com/widgets.js";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }
+                        }(document, "script", "twitter-wjs");</script>
 
 
+                </div>
+                <div id="panel-footer-contact">
+                    <p:outputLabel id="label-footer-contact" value="CONTÁCTENOS" />
+                </div>
+                <div id="panel-footer-location">
+                    <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
+                    <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
+                            width="90%" height="110%" frameborder="0" style="border:0"></iframe>
+                </div>
             </div>
-            <div id="panel-footer-contact">
-                <p:outputLabel id="label-footer-contact" value="CONTÁCTENOS" />
-            </div>
-            <div id="panel-footer-location">
-                <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
-                <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
-                        width="90%" height="110%" frameborder="0" style="border:0"></iframe>
-            </div>
-        </div>
-             
+
+        </h:form>
+
     </h:body>
 </html>
 

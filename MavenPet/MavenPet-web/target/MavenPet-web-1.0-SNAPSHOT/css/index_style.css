@@ -38,7 +38,10 @@ body{
     color: #000000;
     text-align: center;
     line-height: normal;
-    width: 885px;
+    width: 76.5%;
+}
+.ui-menu#form_menutop{
+    width: 20% !important;
 }
 #panel-background2{
     background-color: #EFEFEF;

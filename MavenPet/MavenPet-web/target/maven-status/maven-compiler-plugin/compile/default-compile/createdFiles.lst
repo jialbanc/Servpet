@@ -1,6 +1,5 @@
 com\servpet\userBean.class
 com\servpet\ImagesView.class
-Beans\RegistroManagedBean.class
 com\servpet\CarService.class
 com\servpet\Car.class
 com\servpet\DataScrollerView.class
