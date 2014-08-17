@@ -3,24 +3,30 @@
        xmlns:sec="http://www.springframework.org/schema/security"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
       
+    <!-- Property Configurator -->
     
+     <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="WEB-INF/credentials.properties" />
+     </bean>
+     
     <bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator" id="ticketValidator">
-        <constructor-arg index="0" value="https://jimmy-pc:8443/cas-server-webapp-3.5.2" />
+        <constructor-arg index="0" value="https://${credential}/cas-server-webapp-3.5.2" />
         <property name="proxyGrantingTicketStorage" ref="proxyGrantingTicketStorage" />
-        <property name="proxyCallbackUrl" value="https://jimmy-pc:8443/cas-server-webapp-3.5.2/j_spring_cas_security_proxyreceptor" />
+        <property name="proxyCallbackUrl" value="https://${credential}/cas-server-webapp-3.5.2/j_spring_cas_security_proxyreceptor" />
     </bean>
     <!-- https://jimmy-pc:8443/cas-server-webapp-3.5.2/j_spring_cas_security_proxyreceptor -->
     
     <bean id="casAuthenticationFilter" class="org.jasig.cas.client.authentication.AuthenticationFilter">
-        <property name="casServerLoginUrl" value="https://jimmy-pc:8443/cas-server-webapp-3.5.2/login" />
-        <property name="serverName" value="https://jimmy-pc:8443"/>
+        <property name="casServerLoginUrl" value="https://${credential}/cas-server-webapp-3.5.2/login" />
+        <property name="serverName" value="https://${credential}"/>
     </bean>
     
     <bean id="casValidationFilter" class="org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter">
-        <property name="serverName" value="https://jimmy-pc:8443" />
+        <property name="serverName" value="https://${credential}" />
         <property name="exceptionOnValidationFailure" value="true" />
         <property name="proxyGrantingTicketStorage" ref="proxyGrantingTicketStorage" />
         <property name="redirectAfterValidation" value="true" />

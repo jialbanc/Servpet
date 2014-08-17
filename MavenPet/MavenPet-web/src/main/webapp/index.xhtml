@@ -22,7 +22,7 @@
                         <p:menubar id="menu_top" style="width:42%;">
                             <p:menuitem value="Home" url="/" icon="ui-icon-home" rendered="true">
                             </p:menuitem>
-                            <p:menuitem value="Cerrar Sesión" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-document" rendered="#{rolManagedBean.historialIsRendering()}">
+                            <p:menuitem value="Cerrar Sesión" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" icon="ui-icon-document">
                             </p:menuitem>
                         </p:menubar>
                     </h:form>
@@ -33,18 +33,18 @@
                     <p:menubar id="menu">
                         <p:menuitem value="Home" url="/" icon="ui-icon-home" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Galeria" url="/#{rolManagedBean.currentUserRol}/galeria.xhtml" icon="ui-icon-search" rendered="true">
+                        <p:menuitem value="Galeria" url="/#{userManagedBean.currentUserRol}/galeria.xhtml" icon="ui-icon-search" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Calendario" url="/#{rolManagedBean.currentUserRol}/calendario.xhtml" icon="ui-icon-document" rendered="true">
+                        <p:menuitem value="Calendario" url="/#{userManagedBean.currentUserRol}/calendario.xhtml" icon="ui-icon-document" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Historial" url="/#{rolManagedBean.currentUserRol}/historial.xhtml" icon="ui-icon-document" rendered="#{rolManagedBean.historialIsRendering()}">
+                        <p:menuitem value="Historial" url="/#{userManagedBean.currentUserRol}/historial.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.historialIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Notificaciones" url="/#{rolManagedBean.currentUserRol}/notificaciones.xhtml" icon="ui-icon-document" rendered="#{rolManagedBean.notificacionesIsRendering()}">
+                        <p:menuitem value="Notificaciones" url="/#{userManagedBean.currentUserRol}/notificaciones.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.notificacionesIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Contactenos" url="/#{rolManagedBean.currentUserRol}/contactenos.xhtml" icon="ui-icon-document" rendered="#{rolManagedBean.contactenosIsRendering()}">
+                        <p:menuitem value="Contactenos" url="/#{userManagedBean.currentUserRol}/contactenos.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.contactenosIsRendering()}">
                         </p:menuitem>
                         <p:submenu label="Opciones" icon="ui-icon-wrench">
-                            <p:menuitem value="#{rolManagedBean.currentUser}" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
+                            <p:menuitem value="#{userManagedBean.currentUser}" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
                             <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
                             <p:separator />
                             <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>

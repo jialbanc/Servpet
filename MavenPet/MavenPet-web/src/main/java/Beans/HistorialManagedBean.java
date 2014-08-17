@@ -81,7 +81,7 @@ public class HistorialManagedBean {
     }
     
     public String getUserFromMascota(String userId){
-        return usuario.getUsuarioById(userId);
+        return usuario.getUsuarioById(userId).getApellido();
     }
  
 

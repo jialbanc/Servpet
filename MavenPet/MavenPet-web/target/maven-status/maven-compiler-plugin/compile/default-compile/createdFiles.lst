@@ -1,5 +1,9 @@
 com\servpet\userBean.class
+Beans\HistorialManagedBean.class
+Beans\UserManagedBean.class
 com\servpet\ImagesView.class
 com\servpet\CarService.class
+Beans\CitasManagedBean.class
 com\servpet\Car.class
 com\servpet\DataScrollerView.class
+Beans\NotificacionesManagedBean.class
