@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -64,6 +66,11 @@ public class Usuario implements Serializable {
     private List<Mascotas> mascotasList;
     @OneToMany(mappedBy = "idusuario")
     private List<UsuarioHasCitas> usuarioHasCitasList;
+    @JoinColumn(name = "idrol", referencedColumnName = "idrol")
+    @ManyToOne
+    private Rol idrol;
+    @OneToMany(mappedBy = "idusuario")
+    private List<Contactenos> contactenosList;
 
     public Usuario() {
     }
@@ -136,6 +143,23 @@ public class Usuario implements Serializable {
 
     public void setUsuarioHasCitasList(List<UsuarioHasCitas> usuarioHasCitasList) {
         this.usuarioHasCitasList = usuarioHasCitasList;
+    }
+
+    public Rol getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(Rol idrol) {
+        this.idrol = idrol;
+    }
+
+    @XmlTransient
+    public List<Contactenos> getContactenosList() {
+        return contactenosList;
+    }
+
+    public void setContactenosList(List<Contactenos> contactenosList) {
+        this.contactenosList = contactenosList;
     }
 
     @Override

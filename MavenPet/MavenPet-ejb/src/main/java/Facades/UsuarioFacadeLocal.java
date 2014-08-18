@@ -31,4 +31,6 @@ public interface UsuarioFacadeLocal {
 
     int count();
     
+    Usuario getUsuarioById(String userId);
+    
 }

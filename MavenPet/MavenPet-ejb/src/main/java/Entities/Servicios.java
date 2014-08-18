@@ -31,41 +31,42 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Servicios.findAll", query = "SELECT s FROM Servicios s"),
     @NamedQuery(name = "Servicios.findByIdservicio", query = "SELECT s FROM Servicios s WHERE s.idservicio = :idservicio"),
-    @NamedQuery(name = "Servicios.findByDetalle", query = "SELECT s FROM Servicios s WHERE s.detalle = :detalle")})
+    @NamedQuery(name = "Servicios.findByServicio", query = "SELECT s FROM Servicios s WHERE s.servicio = :servicio")})
 public class Servicios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 2147483647)
     @Column(name = "idservicio")
-    private Integer idservicio;
+    private String idservicio;
     @Size(max = 2147483647)
-    @Column(name = "detalle")
-    private String detalle;
+    @Column(name = "servicio")
+    private String servicio;
     @OneToMany(mappedBy = "idservicios")
     private List<DetalleCita> detalleCitaList;
 
     public Servicios() {
     }
 
-    public Servicios(Integer idservicio) {
+    public Servicios(String idservicio) {
         this.idservicio = idservicio;
     }
 
-    public Integer getIdservicio() {
+    public String getIdservicio() {
         return idservicio;
     }
 
-    public void setIdservicio(Integer idservicio) {
+    public void setIdservicio(String idservicio) {
         this.idservicio = idservicio;
     }
 
-    public String getDetalle() {
-        return detalle;
+    public String getServicio() {
+        return servicio;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setServicio(String servicio) {
+        this.servicio = servicio;
     }
 
     @XmlTransient

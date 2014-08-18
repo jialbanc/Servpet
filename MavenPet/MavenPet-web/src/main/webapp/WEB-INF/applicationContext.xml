@@ -95,7 +95,7 @@
                 <sec:intercept-url pattern="/admin/**" access="ROLE_ADMIN"/>
                 <sec:intercept-url pattern="/employee/**" access="ROLE_EMPLOYEE"/>
                 <sec:intercept-url pattern="/doctor/**" access="ROLE_DOCTOR"/>
-                <sec:intercept-url pattern="/**" access="ROLE_ADMIN"/>
+                <sec:intercept-url pattern="/client/**" access="ROLE_CLIENT"/>
             </sec:filter-invocation-definition-source>
         </property>
     </bean>

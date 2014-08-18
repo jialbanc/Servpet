@@ -29,4 +29,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         super(Usuario.class);
     }
     
+    @Override
+    public Usuario getUsuarioById(String userId){
+        return (Usuario)em.createNamedQuery("Usuario.findByCedula").setParameter("cedula",userId).getSingleResult();
+    }
+    
 }

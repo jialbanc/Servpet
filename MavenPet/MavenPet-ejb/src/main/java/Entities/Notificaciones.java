@@ -29,20 +29,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Notificaciones.findAll", query = "SELECT n FROM Notificaciones n"),
-    @NamedQuery(name = "Notificaciones.findByIdnotificaciones", query = "SELECT n FROM Notificaciones n WHERE n.idnotificaciones = :idnotificaciones"),
+    @NamedQuery(name = "Notificaciones.findByIdnotificacion", query = "SELECT n FROM Notificaciones n WHERE n.idnotificacion = :idnotificacion"),
     @NamedQuery(name = "Notificaciones.findByHora", query = "SELECT n FROM Notificaciones n WHERE n.hora = :hora"),
     @NamedQuery(name = "Notificaciones.findByFecha", query = "SELECT n FROM Notificaciones n WHERE n.fecha = :fecha"),
     @NamedQuery(name = "Notificaciones.findByImagen", query = "SELECT n FROM Notificaciones n WHERE n.imagen = :imagen"),
-    @NamedQuery(name = "Notificaciones.findByContenido", query = "SELECT n FROM Notificaciones n WHERE n.contenido = :contenido")})
+    @NamedQuery(name = "Notificaciones.findByContenido", query = "SELECT n FROM Notificaciones n WHERE n.contenido = :contenido"),
+    @NamedQuery(name = "Notificaciones.findByAsunto", query = "SELECT n FROM Notificaciones n WHERE n.asunto = :asunto")})
 public class Notificaciones implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idnotificaciones")
-    private Integer idnotificaciones;
+    @Size(min = 1, max = 2147483647)
+    @Column(name = "idnotificacion")
+    private String idnotificacion;
+    @Size(max = 2147483647)
     @Column(name = "hora")
-    private Integer hora;
+    private String hora;
     @Size(max = 2147483647)
     @Column(name = "fecha")
     private String fecha;
@@ -52,6 +55,9 @@ public class Notificaciones implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "contenido")
     private String contenido;
+    @Size(max = 2147483647)
+    @Column(name = "asunto")
+    private String asunto;
     @JoinColumn(name = "idcitas", referencedColumnName = "idcitas")
     @ManyToOne
     private Citas idcitas;
@@ -59,23 +65,23 @@ public class Notificaciones implements Serializable {
     public Notificaciones() {
     }
 
-    public Notificaciones(Integer idnotificaciones) {
-        this.idnotificaciones = idnotificaciones;
+    public Notificaciones(String idnotificacion) {
+        this.idnotificacion = idnotificacion;
     }
 
-    public Integer getIdnotificaciones() {
-        return idnotificaciones;
+    public String getIdnotificacion() {
+        return idnotificacion;
     }
 
-    public void setIdnotificaciones(Integer idnotificaciones) {
-        this.idnotificaciones = idnotificaciones;
+    public void setIdnotificacion(String idnotificacion) {
+        this.idnotificacion = idnotificacion;
     }
 
-    public Integer getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Integer hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
@@ -103,6 +109,14 @@ public class Notificaciones implements Serializable {
         this.contenido = contenido;
     }
 
+    public String getAsunto() {
+        return asunto;
+    }
+
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
     public Citas getIdcitas() {
         return idcitas;
     }
@@ -114,7 +128,7 @@ public class Notificaciones implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idnotificaciones != null ? idnotificaciones.hashCode() : 0);
+        hash += (idnotificacion != null ? idnotificacion.hashCode() : 0);
         return hash;
     }
 
@@ -125,7 +139,7 @@ public class Notificaciones implements Serializable {
             return false;
         }
         Notificaciones other = (Notificaciones) object;
-        if ((this.idnotificaciones == null && other.idnotificaciones != null) || (this.idnotificaciones != null && !this.idnotificaciones.equals(other.idnotificaciones))) {
+        if ((this.idnotificacion == null && other.idnotificacion != null) || (this.idnotificacion != null && !this.idnotificacion.equals(other.idnotificacion))) {
             return false;
         }
         return true;
@@ -133,7 +147,7 @@ public class Notificaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Notificaciones[ idnotificaciones=" + idnotificaciones + " ]";
+        return "Entities.Notificaciones[ idnotificacion=" + idnotificacion + " ]";
     }
     
 }

@@ -20,10 +20,12 @@
                 </div>
                 <div id="menu-top" class="nav-bar">
                     <h:form id="form_menutop">
-                        <p:commandLink value="Home" action="/"></p:commandLink>
-                        <p:commandLink value="Mi Cuenta" action="cuenta.xhtml"></p:commandLink>
-                        <p:commandLink value="Mensajes" action="mensajes.xhtml"></p:commandLink>
-                        <p:commandLink value="Cerrar Sesión" target="_self" action="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" ></p:commandLink>
+                        <p:menubar id="menu_top" style="width:42%;">
+                            <p:menuitem value="Home" url="/" icon="ui-icon-home" rendered="true">
+                            </p:menuitem>
+                            <p:menuitem value="Cerrar Sesión" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" icon="ui-icon-document">
+                            </p:menuitem>
+                        </p:menubar>
                     </h:form>
                 </div>
                 <div id="panel-refill"></div>
@@ -41,7 +43,7 @@
                         <p:submenu label="Opciones" icon="ui-icon-wrench">
                             <p:menuitem value="Cuenta"  update="messages" icon="ui-icon-contact" />
                             <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://wrks129-149fiec:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
                         </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>

@@ -47,7 +47,7 @@
                             <p:menuitem value="#{userManagedBean.currentUser}" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
                             <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
                             <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://jimmy-pc:8443/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
+                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
                         </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>

@@ -7,6 +7,9 @@
 package Beans;
 
 import Entities.Citas;
+import Entities.Rol;
+import Entities.Usuario;
+import Entities.UsuarioHasCitas;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.TimeZone;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -39,8 +43,22 @@ import org.primefaces.model.ScheduleModel;
 public class CitasManagedBean implements Serializable {
     
     @EJB
-    private Facades.CitasFacadeLocal citas;
+    private Facades.UsuarioHasCitasFacadeLocal citas;
+    private List<Entities.UsuarioHasCitas> ltCitasDoctor;
+    @EJB
+    private Facades.CitasFacadeLocal cita;
     private List<Entities.Citas> ltCitas;
+    
+    @EJB
+    private Facades.RolFacadeLocal rol;
+    private List<Entities.Rol> ltRoles;
+    
+    private List<Entities.Usuario> ltDoctores;
+    
+    
+     private Entities.Citas selCita;
+    private Entities.Usuario selectedUser;
+    private List<Entities.Usuario> usuariosfiltrados;
     
     private ScheduleModel eventModel;
  
@@ -48,14 +66,22 @@ public class CitasManagedBean implements Serializable {
  
     @PostConstruct
     public void init() {
-        ltCitas = citas.findAll();
-        for (Citas c : ltCitas){
-            eventModel = new DefaultScheduleModel();
-            //eventModel.addEvent(new DefaultScheduleEvent(c.getIdcitas(), theDayAfter3Pm(), fourDaysLater3pm()));
+        
+        ltRoles = rol.findAll();
+        for (Rol r : ltRoles){
+            if(r.getRol().equals("ROLE_DOCTOR"))
+                ltDoctores = r.getUsuarioList();
         }
-            
+        /*ltCitas = cita.findAll();
+        for (Citas c : ltCitas){
+            eventModel.addEvent(new DefaultScheduleEvent(c.getMedicinas(), getDateFromString(c.getFecha(),c.getHora()),getFinalDateFromString(c.getFecha(),c.getHora())));
+            System.out.println("1");
+        }*/
     }
-     
+    
+    public void initCalendar(){
+        
+    }
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
         date.setTime(base);
@@ -64,32 +90,94 @@ public class CitasManagedBean implements Serializable {
         return date.getTime();
     }
     
-    /*public Date getDateFromString(String strdate){
-        Calendar date = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd");
-        date.setTime(sdf.parse(strdate));        
-        return date.getTime();
-
-    }*/
-    
-    public Date getInitialDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY, calendar.get(Calendar.DATE), 0, 0, 0);
-         
-        return calendar.getTime();
+    public Date getDateFromString(String strdate,String strhour){
+        try{
+            Calendar date = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            date.setTime(sdf.parse(strdate+" "+strhour));
+            date.setTimeZone(TimeZone.getTimeZone("GMT-5"));
+            System.out.println(date);
+            return date.getTime();
+        }
+        catch(ParseException pe){
+            pe.printStackTrace();
+        }
+        return null;
     }
-     
+    public Date getFinalDateFromString(String strdate,String strhour){
+        try{
+            Calendar date = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            date.setTime(sdf.parse(strdate+" "+strhour));
+            date.set(Calendar.MINUTE,date.get(Calendar.MINUTE)+30);
+            return date.getTime();
+        }
+        catch(ParseException pe){
+            pe.printStackTrace();
+        }
+        return null;
+    }
+
+    public List<Citas> getLtCitas() {
+        return ltCitas;
+    }
+
+    public void setLtCitas(List<Citas> ltCitas) {
+        this.ltCitas = ltCitas;
+    }
+
+    public List<Usuario> getLtDoctores() {
+        return ltDoctores;
+    }
+
+    public void setLtDoctores(List<Usuario> ltDoctores) {
+        this.ltDoctores = ltDoctores;
+    }
+
+    public Usuario getSelectedUser() {
+        
+        return selectedUser;
+    }
+
+    public void setSelectedUser(Usuario selectedUser) {
+        eventModel = new DefaultScheduleModel();
+        ltCitasDoctor = selectedUser.getUsuarioHasCitasList();
+        for (UsuarioHasCitas c : ltCitasDoctor){
+            Citas cit=c.getIdcitas();
+            eventModel.addEvent(new DefaultScheduleEvent(cit.getMedicinas(), getDateFromString(cit.getFecha(),cit.getHora()),getFinalDateFromString(cit.getFecha(),cit.getHora())));
+        }
+        this.selectedUser = selectedUser;
+    }
+
+    public Citas getSelCita() {
+        return selCita;
+    }
+
+    public void setSelCita(Citas selCita) {
+        this.selCita = selCita;
+    }
+
+    public List<Usuario> getUsuariosfiltrados() {
+        return usuariosfiltrados;
+    }
+
+    public void setUsuariosfiltrados(List<Usuario> usuariosfiltrados) {
+        this.usuariosfiltrados = usuariosfiltrados;
+    }
+
+    public List<UsuarioHasCitas> getLtCitasDoctor() {
+        return ltCitasDoctor;
+    }
+
+    public void setLtCitasDoctor(List<UsuarioHasCitas> ltCitasDoctor) {
+        this.ltCitasDoctor = ltCitasDoctor;
+    }
+    
     public ScheduleModel getEventModel() {
+        
         return eventModel;
     }
  
-    private Calendar today() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 0, 0, 0);
- 
-        return calendar;
-    }
-     
     public ScheduleEvent getEvent() {
         return event;
     }

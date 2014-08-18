@@ -7,16 +7,19 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,8 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r"),
     @NamedQuery(name = "Rol.findByIdrol", query = "SELECT r FROM Rol r WHERE r.idrol = :idrol"),
-    @NamedQuery(name = "Rol.findByRol", query = "SELECT r FROM Rol r WHERE r.rol = :rol"),
-    @NamedQuery(name = "Rol.findByIdusuario", query = "SELECT r.rol FROM Rol r WHERE r.idusuario = :idusuario")})
+    @NamedQuery(name = "Rol.findByRol", query = "SELECT r FROM Rol r WHERE r.rol = :rol")})
 public class Rol implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,9 +43,8 @@ public class Rol implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "rol")
     private String rol;
-    @Size(max = 2147483647)
-    @Column(name = "idusuario")
-    private String idusuario;
+    @OneToMany(mappedBy = "idrol")
+    private List<Usuario> usuarioList;
 
     public Rol() {
     }
@@ -68,12 +69,13 @@ public class Rol implements Serializable {
         this.rol = rol;
     }
 
-    public String getIdusuario() {
-        return idusuario;
+    @XmlTransient
+    public List<Usuario> getUsuarioList() {
+        return usuarioList;
     }
 
-    public void setIdusuario(String idusuario) {
-        this.idusuario = idusuario;
+    public void setUsuarioList(List<Usuario> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
     @Override

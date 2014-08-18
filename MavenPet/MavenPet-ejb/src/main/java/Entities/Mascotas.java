@@ -7,6 +7,7 @@
 package Entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,10 +16,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mascotas.findByNombre", query = "SELECT m FROM Mascotas m WHERE m.nombre = :nombre"),
     @NamedQuery(name = "Mascotas.findBySexo", query = "SELECT m FROM Mascotas m WHERE m.sexo = :sexo"),
     @NamedQuery(name = "Mascotas.findByEdad", query = "SELECT m FROM Mascotas m WHERE m.edad = :edad"),
-    @NamedQuery(name = "Mascotas.findByRaza", query = "SELECT m FROM Mascotas m WHERE m.raza = :raza")})
+    @NamedQuery(name = "Mascotas.findByRaza", query = "SELECT m FROM Mascotas m WHERE m.raza = :raza"),
+    @NamedQuery(name = "Mascotas.findByEnfermedades", query = "SELECT m FROM Mascotas m WHERE m.enfermedades = :enfermedades")})
 public class Mascotas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,9 +57,14 @@ public class Mascotas implements Serializable {
     @Size(max = 2147483647)
     @Column(name = "raza")
     private String raza;
+    @Size(max = 2147483647)
+    @Column(name = "enfermedades")
+    private String enfermedades;
     @JoinColumn(name = "idusuario", referencedColumnName = "cedula")
     @ManyToOne
     private Usuario idusuario;
+    @OneToMany(mappedBy = "idmascota")
+    private List<Citas> citasList;
 
     public Mascotas() {
     }
@@ -104,12 +113,29 @@ public class Mascotas implements Serializable {
         this.raza = raza;
     }
 
+    public String getEnfermedades() {
+        return enfermedades;
+    }
+
+    public void setEnfermedades(String enfermedades) {
+        this.enfermedades = enfermedades;
+    }
+
     public Usuario getIdusuario() {
         return idusuario;
     }
 
     public void setIdusuario(Usuario idusuario) {
         this.idusuario = idusuario;
+    }
+
+    @XmlTransient
+    public List<Citas> getCitasList() {
+        return citasList;
+    }
+
+    public void setCitasList(List<Citas> citasList) {
+        this.citasList = citasList;
     }
 
     @Override

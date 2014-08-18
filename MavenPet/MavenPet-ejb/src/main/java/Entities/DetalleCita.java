@@ -17,6 +17,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,34 +29,44 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DetalleCita.findAll", query = "SELECT d FROM DetalleCita d"),
-    @NamedQuery(name = "DetalleCita.findByIddetalleCita", query = "SELECT d FROM DetalleCita d WHERE d.iddetalleCita = :iddetalleCita")})
+    @NamedQuery(name = "DetalleCita.findByIddetalleCita", query = "SELECT d FROM DetalleCita d WHERE d.iddetalleCita = :iddetalleCita"),
+    @NamedQuery(name = "DetalleCita.findByIdcitas", query = "SELECT d FROM DetalleCita d WHERE d.idcitas = :idcitas")})
 public class DetalleCita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 2147483647)
     @Column(name = "iddetalle_cita")
-    private Integer iddetalleCita;
+    private String iddetalleCita;
+    @Size(max = 2147483647)
+    @Column(name = "idcitas")
+    private String idcitas;
     @JoinColumn(name = "idservicios", referencedColumnName = "idservicio")
     @ManyToOne
     private Servicios idservicios;
-    @JoinColumn(name = "idcitas", referencedColumnName = "idcitas")
-    @ManyToOne
-    private Citas idcitas;
 
     public DetalleCita() {
     }
 
-    public DetalleCita(Integer iddetalleCita) {
+    public DetalleCita(String iddetalleCita) {
         this.iddetalleCita = iddetalleCita;
     }
 
-    public Integer getIddetalleCita() {
+    public String getIddetalleCita() {
         return iddetalleCita;
     }
 
-    public void setIddetalleCita(Integer iddetalleCita) {
+    public void setIddetalleCita(String iddetalleCita) {
         this.iddetalleCita = iddetalleCita;
+    }
+
+    public String getIdcitas() {
+        return idcitas;
+    }
+
+    public void setIdcitas(String idcitas) {
+        this.idcitas = idcitas;
     }
 
     public Servicios getIdservicios() {
@@ -64,14 +75,6 @@ public class DetalleCita implements Serializable {
 
     public void setIdservicios(Servicios idservicios) {
         this.idservicios = idservicios;
-    }
-
-    public Citas getIdcitas() {
-        return idcitas;
-    }
-
-    public void setIdcitas(Citas idcitas) {
-        this.idcitas = idcitas;
     }
 
     @Override
