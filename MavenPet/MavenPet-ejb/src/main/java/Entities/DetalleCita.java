@@ -10,14 +10,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,58 +29,56 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "DetalleCita.findAll", query = "SELECT d FROM DetalleCita d"),
-    @NamedQuery(name = "DetalleCita.findByIddetalleCita", query = "SELECT d FROM DetalleCita d WHERE d.iddetalleCita = :iddetalleCita"),
-    @NamedQuery(name = "DetalleCita.findByIdcitas", query = "SELECT d FROM DetalleCita d WHERE d.idcitas = :idcitas")})
+    @NamedQuery(name = "DetalleCita.findByIddetalleCitas", query = "SELECT d FROM DetalleCita d WHERE d.iddetalleCitas = :iddetalleCitas")})
 public class DetalleCita implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "iddetalle_cita")
-    private String iddetalleCita;
-    @Size(max = 2147483647)
-    @Column(name = "idcitas")
-    private String idcitas;
-    @JoinColumn(name = "idservicios", referencedColumnName = "idservicio")
+    @Column(name = "iddetalle_citas")
+    private Integer iddetalleCitas;
+    @JoinColumn(name = "idservicio", referencedColumnName = "idservicio")
     @ManyToOne
-    private Servicios idservicios;
+    private Servicios idservicio;
+    @JoinColumn(name = "idcitas", referencedColumnName = "idcitas")
+    @ManyToOne
+    private Citas idcitas;
 
     public DetalleCita() {
     }
 
-    public DetalleCita(String iddetalleCita) {
-        this.iddetalleCita = iddetalleCita;
+    public DetalleCita(Integer iddetalleCitas) {
+        this.iddetalleCitas = iddetalleCitas;
     }
 
-    public String getIddetalleCita() {
-        return iddetalleCita;
+    public Integer getIddetalleCitas() {
+        return iddetalleCitas;
     }
 
-    public void setIddetalleCita(String iddetalleCita) {
-        this.iddetalleCita = iddetalleCita;
+    public void setIddetalleCitas(Integer iddetalleCitas) {
+        this.iddetalleCitas = iddetalleCitas;
     }
 
-    public String getIdcitas() {
+    public Servicios getIdservicio() {
+        return idservicio;
+    }
+
+    public void setIdservicio(Servicios idservicio) {
+        this.idservicio = idservicio;
+    }
+
+    public Citas getIdcitas() {
         return idcitas;
     }
 
-    public void setIdcitas(String idcitas) {
+    public void setIdcitas(Citas idcitas) {
         this.idcitas = idcitas;
-    }
-
-    public Servicios getIdservicios() {
-        return idservicios;
-    }
-
-    public void setIdservicios(Servicios idservicios) {
-        this.idservicios = idservicios;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (iddetalleCita != null ? iddetalleCita.hashCode() : 0);
+        hash += (iddetalleCitas != null ? iddetalleCitas.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +89,7 @@ public class DetalleCita implements Serializable {
             return false;
         }
         DetalleCita other = (DetalleCita) object;
-        if ((this.iddetalleCita == null && other.iddetalleCita != null) || (this.iddetalleCita != null && !this.iddetalleCita.equals(other.iddetalleCita))) {
+        if ((this.iddetalleCitas == null && other.iddetalleCitas != null) || (this.iddetalleCitas != null && !this.iddetalleCitas.equals(other.iddetalleCitas))) {
             return false;
         }
         return true;
@@ -99,7 +97,7 @@ public class DetalleCita implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.DetalleCita[ iddetalleCita=" + iddetalleCita + " ]";
+        return "Entities.DetalleCita[ iddetalleCitas=" + iddetalleCitas + " ]";
     }
     
 }

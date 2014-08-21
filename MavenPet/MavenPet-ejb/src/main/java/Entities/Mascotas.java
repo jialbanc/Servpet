@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +20,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -41,11 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Mascotas implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
     @Column(name = "idmascotas")
-    private String idmascotas;
+    private Integer idmascotas;
     @Size(max = 2147483647)
     @Column(name = "nombre")
     private String nombre;
@@ -69,15 +69,15 @@ public class Mascotas implements Serializable {
     public Mascotas() {
     }
 
-    public Mascotas(String idmascotas) {
+    public Mascotas(Integer idmascotas) {
         this.idmascotas = idmascotas;
     }
 
-    public String getIdmascotas() {
+    public Integer getIdmascotas() {
         return idmascotas;
     }
 
-    public void setIdmascotas(String idmascotas) {
+    public void setIdmascotas(Integer idmascotas) {
         this.idmascotas = idmascotas;
     }
 

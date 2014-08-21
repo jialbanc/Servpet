@@ -11,12 +11,13 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,29 +36,28 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Servicios implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
     @Column(name = "idservicio")
-    private String idservicio;
+    private Integer idservicio;
     @Size(max = 2147483647)
     @Column(name = "servicio")
     private String servicio;
-    @OneToMany(mappedBy = "idservicios")
+    @OneToMany(mappedBy = "idservicio")
     private List<DetalleCita> detalleCitaList;
 
     public Servicios() {
     }
 
-    public Servicios(String idservicio) {
+    public Servicios(Integer idservicio) {
         this.idservicio = idservicio;
     }
 
-    public String getIdservicio() {
+    public Integer getIdservicio() {
         return idservicio;
     }
 
-    public void setIdservicio(String idservicio) {
+    public void setIdservicio(Integer idservicio) {
         this.idservicio = idservicio;
     }
 

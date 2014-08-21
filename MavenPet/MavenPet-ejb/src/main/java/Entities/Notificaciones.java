@@ -10,13 +10,14 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Notificaciones.findAll", query = "SELECT n FROM Notificaciones n"),
-    @NamedQuery(name = "Notificaciones.findByIdnotificacion", query = "SELECT n FROM Notificaciones n WHERE n.idnotificacion = :idnotificacion"),
+    @NamedQuery(name = "Notificaciones.findByIdnotificaciones", query = "SELECT n FROM Notificaciones n WHERE n.idnotificaciones = :idnotificaciones"),
     @NamedQuery(name = "Notificaciones.findByHora", query = "SELECT n FROM Notificaciones n WHERE n.hora = :hora"),
     @NamedQuery(name = "Notificaciones.findByFecha", query = "SELECT n FROM Notificaciones n WHERE n.fecha = :fecha"),
     @NamedQuery(name = "Notificaciones.findByImagen", query = "SELECT n FROM Notificaciones n WHERE n.imagen = :imagen"),
@@ -38,11 +39,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Notificaciones implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2147483647)
-    @Column(name = "idnotificacion")
-    private String idnotificacion;
+    @Column(name = "idnotificaciones")
+    private Integer idnotificaciones;
     @Size(max = 2147483647)
     @Column(name = "hora")
     private String hora;
@@ -65,16 +65,16 @@ public class Notificaciones implements Serializable {
     public Notificaciones() {
     }
 
-    public Notificaciones(String idnotificacion) {
-        this.idnotificacion = idnotificacion;
+    public Notificaciones(Integer idnotificaciones) {
+        this.idnotificaciones = idnotificaciones;
     }
 
-    public String getIdnotificacion() {
-        return idnotificacion;
+    public Integer getIdnotificaciones() {
+        return idnotificaciones;
     }
 
-    public void setIdnotificacion(String idnotificacion) {
-        this.idnotificacion = idnotificacion;
+    public void setIdnotificaciones(Integer idnotificaciones) {
+        this.idnotificaciones = idnotificaciones;
     }
 
     public String getHora() {
@@ -128,7 +128,7 @@ public class Notificaciones implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idnotificacion != null ? idnotificacion.hashCode() : 0);
+        hash += (idnotificaciones != null ? idnotificaciones.hashCode() : 0);
         return hash;
     }
 
@@ -139,7 +139,7 @@ public class Notificaciones implements Serializable {
             return false;
         }
         Notificaciones other = (Notificaciones) object;
-        if ((this.idnotificacion == null && other.idnotificacion != null) || (this.idnotificacion != null && !this.idnotificacion.equals(other.idnotificacion))) {
+        if ((this.idnotificaciones == null && other.idnotificaciones != null) || (this.idnotificaciones != null && !this.idnotificaciones.equals(other.idnotificaciones))) {
             return false;
         }
         return true;
@@ -147,7 +147,7 @@ public class Notificaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "Entities.Notificaciones[ idnotificacion=" + idnotificacion + " ]";
+        return "Entities.Notificaciones[ idnotificaciones=" + idnotificaciones + " ]";
     }
     
 }
