@@ -96,9 +96,8 @@
                                     <p:inputMask id="hour" value="#{citasManagedBean.event.startDate}" mask="99:99">
                                         <f:convertDateTime pattern="HH:mm" timeZone="GMT-5"/>
                                     </p:inputMask>
-                                    #{citasManagedBean.event.startDate}
                                     <p:commandButton type="reset" value="Cancelar" />
-                                    <p:commandButton update="" id="addButton" value="Guardar" actionListener="#{citasManagedBean.addEvent}" oncomplete="PF('myschedule').update();PF('editDayDialog').hide();"/>
+                                    <p:commandButton id="addButton" value="Guardar" actionListener="#{citasManagedBean.addEvent}" oncomplete="PF('myschedule').update();PF('editDayDialog').hide();"/>
                                 </h:panelGrid>
                             </p:dialog>
                             

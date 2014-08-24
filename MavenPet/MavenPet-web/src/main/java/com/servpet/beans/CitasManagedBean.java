@@ -57,9 +57,10 @@ public class CitasManagedBean implements Serializable {
     private Facades.RolFacadeLocal rol;
     private List<Entities.Rol> ltRoles;
     
+    @EJB
+    private Facades.UsuarioHasCitasFacadeLocal usuariocita;
     private List<Entities.Usuario> ltDoctores;
     
-     private Entities.Citas selCita;
     private Entities.Usuario selectedUser;
     private List<Entities.Usuario> usuariosfiltrados;
     
@@ -147,22 +148,17 @@ public class CitasManagedBean implements Serializable {
     }
 
     public void setSelectedUser(Usuario selectedUser) {
+        loadSchedule(selectedUser);
+        this.selectedUser = selectedUser;
+    }
+    public void loadSchedule(Usuario selected){
         eventModel = new DefaultScheduleModel();
-        ltCitasDoctor = selectedUser.getUsuarioHasCitasList();
+        ltCitasDoctor = selected.getUsuarioHasCitasList();
         for (UsuarioHasCitas c : ltCitasDoctor){
             Citas cit=c.getIdcitas();
             if(cit.getEstado().equals(AVAILABLE.getReference()))
                 eventModel.addEvent(new DefaultScheduleEvent(cit.getEstado(), getDateFromString(cit.getFecha(),cit.getHora()),getFinalDateFromString(cit.getFecha(),cit.getHora())));
         }
-        this.selectedUser = selectedUser;
-    }
-    
-    public Citas getSelCita() {
-        return selCita;
-    }
-
-    public void setSelCita(Citas selCita) {
-        this.selCita = selCita;
     }
 
     public List<Usuario> getUsuariosfiltrados() {
@@ -201,10 +197,12 @@ public class CitasManagedBean implements Serializable {
         String hour = sdfHour.format(event.getStartDate());
         Entities.Citas c = new Citas(date,hour,event.getTitle());
         cita.create(c);
-        //Entities.UsuarioHasCitas uc = new UsuarioHasCitas(selectedUser,c);
+        Entities.UsuarioHasCitas uc = new UsuarioHasCitas(selectedUser,c);
+        usuariocita.create(uc);
         event = new DefaultScheduleEvent();
+        loadSchedule(selectedUser);
     }
-     
+    
     public void onEventSelect(SelectEvent selectEvent) {
         event = (ScheduleEvent) selectEvent.getObject();
     }
