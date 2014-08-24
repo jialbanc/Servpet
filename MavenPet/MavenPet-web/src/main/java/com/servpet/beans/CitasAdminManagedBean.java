@@ -42,9 +42,9 @@ import org.primefaces.model.ScheduleModel;
  *
  * @author Administrador
  */
-@ManagedBean(name = "citasManagedBean", eager = true)
+@ManagedBean(name = "citasAdminManagedBean", eager = true)
 @ViewScoped
-public class CitasManagedBean implements Serializable {
+public class CitasAdminManagedBean implements Serializable {
     
     @EJB
     private Facades.UsuarioHasCitasFacadeLocal citas;
