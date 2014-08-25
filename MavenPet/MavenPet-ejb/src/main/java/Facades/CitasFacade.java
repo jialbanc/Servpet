@@ -29,4 +29,9 @@ public class CitasFacade extends AbstractFacade<Citas> implements CitasFacadeLoc
         super(Citas.class);
     }
     
+    @Override
+    public Citas getUsuarioByHourDate(String hora, String fecha){
+        return (Citas)em.createNamedQuery("Citas.findByHoraFecha").setParameter("hora",hora).setParameter("fecha", fecha).getSingleResult();
+    }
+    
 }

@@ -6,6 +6,8 @@
 
 package Facades;
 
+import Entities.Citas;
+import Entities.Usuario;
 import Entities.UsuarioHasCitas;
 import java.util.List;
 import javax.ejb.Local;
@@ -31,4 +33,5 @@ public interface UsuarioHasCitasFacadeLocal {
 
     int count();
     
+    UsuarioHasCitas getUsuarioByUsuarioCitas(Usuario usuario, Citas cita);
 }

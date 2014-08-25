@@ -31,4 +31,6 @@ public interface CitasFacadeLocal {
 
     int count();
     
+    Citas getUsuarioByHourDate(String hora, String fecha);
+    
 }
