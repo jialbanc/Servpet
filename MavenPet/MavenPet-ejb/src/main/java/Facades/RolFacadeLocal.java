@@ -31,4 +31,5 @@ public interface RolFacadeLocal {
 
     int count();
     
+    Rol getRolByIdRol(Integer idRol);
 }

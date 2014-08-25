@@ -33,4 +33,5 @@ public interface UsuarioFacadeLocal {
     
     Usuario getUsuarioById(String userId);
     
+    public Usuario getUsuarioByIdRol(String idRol);
 }

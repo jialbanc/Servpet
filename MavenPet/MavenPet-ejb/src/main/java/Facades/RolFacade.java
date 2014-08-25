@@ -28,5 +28,9 @@ public class RolFacade extends AbstractFacade<Rol> implements RolFacadeLocal {
     public RolFacade() {
         super(Rol.class);
     }
-    
+     
+    @Override
+    public Rol getRolByIdRol(Integer idRol){
+        return (Rol) em.createNamedQuery("Rol.findByIdrol").setParameter("idrol",idRol).getSingleResult();
+    }
 }

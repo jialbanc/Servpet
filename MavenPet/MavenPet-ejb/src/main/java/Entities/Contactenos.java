@@ -52,6 +52,12 @@ public class Contactenos implements Serializable {
 
     public Contactenos() {
     }
+    public Contactenos(Usuario usuario,String asunto, String mensaje) {
+        this.asunto = asunto;
+        this.mensaje= mensaje;
+        this.idusuario=usuario;
+    }
+
 
     public Contactenos(Integer idcontactenos) {
         this.idcontactenos = idcontactenos;
