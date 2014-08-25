@@ -60,11 +60,12 @@ public class CitasAdminManagedBean implements Serializable {
     @EJB
     private Facades.UsuarioHasCitasFacadeLocal usuariocita;
     private List<Entities.Usuario> ltDoctores;
-    
-    private Entities.Usuario selectedUser;
+   
+    private Entities.Usuario selectedDoctor;
     private List<Entities.Usuario> usuariosfiltrados;
     
     private final int deltaMinutes=30;
+    private boolean citaSeleccionada;
     
     private ScheduleModel eventModel;
  
@@ -72,20 +73,12 @@ public class CitasAdminManagedBean implements Serializable {
  
     @PostConstruct
     public void init() {
-        
+        citaSeleccionada=false;
         ltRoles = rol.findAll();
         for (Rol r : ltRoles){
             if(r.getRol().equals(DOCTOR.getReference()))
                 ltDoctores = r.getUsuarioList();
         }
-    }
-    
-    public Date getRandomDate(Date base) {
-        Calendar date = Calendar.getInstance();
-        date.setTime(base);
-        date.add(Calendar.DATE, ((int) (Math.random()*30)) + 1);    //set random day of month
-         
-        return date.getTime();
     }
     
     public Date getDateFromString(String strdate,String strhour){
@@ -143,13 +136,13 @@ public class CitasAdminManagedBean implements Serializable {
         this.ltDoctores = ltDoctores;
     }
 
-    public Usuario getSelectedUser() {
-        return selectedUser;
+    public Usuario getSelectedDoctor() {
+        return selectedDoctor;
     }
 
-    public void setSelectedUser(Usuario selectedUser) {
-        loadSchedule(selectedUser);
-        this.selectedUser = selectedUser;
+    public void setSelectedDoctor(Usuario selectedDoctor) {
+        loadSchedule(selectedDoctor);
+        this.selectedDoctor = selectedDoctor;
     }
     public void loadSchedule(Usuario selected){
         eventModel = new DefaultScheduleModel();
@@ -181,6 +174,14 @@ public class CitasAdminManagedBean implements Serializable {
         
         return eventModel;
     }
+
+    public boolean isCitaSeleccionada() {
+        return citaSeleccionada;
+    }
+
+    public void setCitaSeleccionada(boolean citaSeleccionada) {
+        this.citaSeleccionada = citaSeleccionada;
+    }
  
     public ScheduleEvent getEvent() {
         return event;
@@ -197,25 +198,35 @@ public class CitasAdminManagedBean implements Serializable {
         String hour = sdfHour.format(event.getStartDate());
         Entities.Citas c = new Citas(date,hour,event.getTitle());
         cita.create(c);
-        Entities.UsuarioHasCitas uc = new UsuarioHasCitas(selectedUser,c);
+        Entities.UsuarioHasCitas uc = new UsuarioHasCitas(selectedDoctor,c);
         usuariocita.create(uc);
         event = new DefaultScheduleEvent();
-        loadSchedule(selectedUser);
+        loadSchedule(selectedDoctor);
+    }
+    
+    public void deleteEvent(ActionEvent actionEvent) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy/MM/dd");
+        String date = sdfDate.format(event.getEndDate());
+        SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
+        String hour = sdfHour.format(event.getStartDate());
+        Entities.Citas c = cita.getUsuarioByHourDate(hour, date);
+        Entities.UsuarioHasCitas uc = citas.getUsuarioByUsuarioCitas(selectedDoctor, c);
+        usuariocita.remove(uc);
+        cita.remove(c);
+        event = new DefaultScheduleEvent();
+        loadSchedule(selectedDoctor);
+        citaSeleccionada=false;
     }
     
     public void onEventSelect(SelectEvent selectEvent) {
+        citaSeleccionada=true;
         event = (ScheduleEvent) selectEvent.getObject();
     }
-     
-    public void onDateSelect(SelectEvent selectEvent) {
-        event = new DefaultScheduleEvent(AVAILABLE.getReference(), (Date) selectEvent.getObject(), addDeltaMinutesToDate((Date) selectEvent.getObject(),deltaMinutes));
-    }
     
-    public void onEventMove(ScheduleEntryMoveEvent event) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Event moved", "Day delta:" + event.getDayDelta() + ", Minute delta:" + event.getMinuteDelta());
-         
-        addMessage(message);
-    }
+    public void onDateSelect(SelectEvent selectEvent) {
+        citaSeleccionada=false;
+        event = new DefaultScheduleEvent(AVAILABLE.getReference(), (Date) selectEvent.getObject(), addDeltaMinutesToDate((Date) selectEvent.getObject(),deltaMinutes));
+    }  
     
     private void addMessage(FacesMessage message) {
         FacesContext.getCurrentInstance().addMessage(null, message);

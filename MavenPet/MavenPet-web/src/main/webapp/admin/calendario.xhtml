@@ -67,17 +67,16 @@
                             </p:column>
                             <p:column style="width:24px">
                                 <p:commandButton update=":form:calendarDialog" oncomplete="PF('calendarDialog').show();PF('myschedule').update();" icon="ui-icon-mail-open" title="View">
-                                    <f:setPropertyActionListener value="#{doctor}" target="#{citasAdminManagedBean.selectedUser}" />
+                                    <f:setPropertyActionListener value="#{doctor}" target="#{citasAdminManagedBean.selectedDoctor}" />
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
-                        <p:dialog id="calendarDialog" header="Calendario de Citas" showEffect="fade" widgetVar="calendarDialog" modal="true" resizable="false">
-                            <p:schedule id="schedule1" value="#{citasAdminManagedBean.eventModel}" widgetVar="myschedule" view="agendaWeek" timeZone="GMT-5" slotMinutes="#{citasAdminManagedBean.deltaMinutes}" ignoreTimezone="false"  locale="es" rendered="#{not empty citasAdminManagedBean.selectedUser}" >
+                        <p:dialog id="calendarDialog" header="Calendario de Citas" showEffect="fade" widgetVar="calendarDialog" resizable="false">
+                            <p:schedule id="schedule1" value="#{citasAdminManagedBean.eventModel}" widgetVar="myschedule" allDaySlot="false" view="agendaWeek" minTime="06:00" maxTime="21:00" timeZone="GMT-5" slotMinutes="#{citasAdminManagedBean.deltaMinutes}" ignoreTimezone="false"  locale="es" rendered="#{not empty citasAdminManagedBean.selectedDoctor}" >
                                 <p:ajax event="dateSelect" listener="#{citasAdminManagedBean.onDateSelect}" update="eventDetails" oncomplete="PF('editDayDialog').show()" />
                                 <p:ajax event="eventSelect" listener="#{citasAdminManagedBean.onEventSelect}" update="eventDetails" oncomplete="PF('editDayDialog').show()" />
-                                <p:ajax event="eventMove" listener="#{citasAdminManagedBean.onEventMove}" update="messages" />
                             </p:schedule>
-                            <p:dialog id="editDialog"  widgetVar="editDayDialog" header="eventDetails" showEffect="fade" hideEffect="clip" resizable="false">
+                            <p:dialog id="editDialog"  widgetVar="editDayDialog" header="Asignación de horario" showEffect="fade" hideEffect="clip" resizable="false" closeOnEscape="true">
                                 <h:panelGrid id="eventDetails" columns="2">
                                     <h:outputLabel for="title" value="Estado:" />
                                     <p:inputText id="title" value="#{citasAdminManagedBean.event.title}" disabled="true"/>
@@ -85,12 +84,12 @@
                                     <p:inputMask id="date" value="#{citasAdminManagedBean.event.startDate}" mask="9999/99/99">
                                         <f:convertDateTime pattern="yyyy/MM/dd" timeZone="GMT-5" />
                                     </p:inputMask>
-                                    <h:outputLabel for="hour" value="Hora Inicio:" />
+                                    <h:outputLabel for="hour" value="Hora:" />
                                     <p:inputMask id="hour" value="#{citasAdminManagedBean.event.startDate}" mask="99:99">
                                         <f:convertDateTime pattern="HH:mm" timeZone="GMT-5"/>
                                     </p:inputMask>
-                                    <p:commandButton type="reset" value="Cancelar" />
-                                    <p:commandButton id="addButton" value="Guardar" actionListener="#{citasAdminManagedBean.addEvent}" oncomplete="PF('myschedule').update();PF('editDayDialog').hide();"/>
+                                    <p:commandButton id="addButton" value="Guardar" actionListener="#{citasAdminManagedBean.addEvent}" oncomplete="PF('myschedule').update();PF('editDayDialog').hide();" rendered="#{not citasAdminManagedBean.citaSeleccionada}"/>
+                                    <p:commandButton id="deleteButton" value="Eliminar" actionListener="#{citasAdminManagedBean.deleteEvent}" oncomplete="PF('myschedule').update();PF('editDayDialog').hide();" rendered="#{citasAdminManagedBean.citaSeleccionada}"/>
                                 </h:panelGrid>
                             </p:dialog>
                         </p:dialog>
