@@ -30,19 +30,12 @@
                 <h:form id="form">  
                     <p:growl id="messages"/>
                     <p:menubar id="menu">
-                        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home">
+                        <p:menuitem value="Home" url="/" icon="ui-icon-home">
                         </p:menuitem>
                         <p:menuitem value="Galeria" url="galeria.xhtml" icon="ui-icon-search">
                         </p:menuitem>
                         <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
                         </p:menuitem>
-                        <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
-                        </p:menuitem>
-                        <p:submenu label="Opciones" icon="ui-icon-wrench">
-                            <p:menuitem value="Cuenta"  update="messages" icon="ui-icon-contact" />
-                            <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
-                        </p:submenu>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                         </f:facet>

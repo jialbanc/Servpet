@@ -78,7 +78,14 @@ public class UserManagedBean {
             state=true;
         return state;
     }
-    
+    public boolean registroIsRendering(){
+        boolean state=false;
+        if(userRolIs(ADMIN))
+            state=true;
+        if(userRolIs(EMPLOYEE))
+            state=true;
+        return state;
+    }
     public boolean historialIsRendering(){
         boolean state=false;
         if(userRolIs(ADMIN))

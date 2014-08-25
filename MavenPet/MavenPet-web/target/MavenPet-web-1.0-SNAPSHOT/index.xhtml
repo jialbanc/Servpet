@@ -39,16 +39,11 @@
                         </p:menuitem>
                         <p:menuitem value="Historial" url="/#{userManagedBean.currentUserRol}/historial.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.historialIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Notificaciones" url="/#{userManagedBean.currentUserRol}/notificaciones.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.notificacionesIsRendering()}">
-                        </p:menuitem>
                         <p:menuitem value="Contactenos" url="/#{userManagedBean.currentUserRol}/contactenos.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.contactenosIsRendering()}">
                         </p:menuitem>
-                        <p:submenu label="Opciones" icon="ui-icon-wrench">
-                            <p:menuitem value="#{userManagedBean.currentUser}" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-contact" />
-                            <p:menuitem value="Mensajes" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
-                            <p:separator />
-                            <p:menuitem value="Cerrar Sesión" target="_self" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" icon="ui-icon-power"/>
-                        </p:submenu>
+                        <p:menuitem value="Registro" url="/#{userManagedBean.currentUserRol}/registro.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.registroIsRendering()}">
+                        </p:menuitem>
+                        <p:menuitem value="Notificaciones" url="/#{userManagedBean.currentUserRol}/notificaciones.xhtml"  icon="ui-icon-mail-closed" rendered="#{userManagedBean.notificacionesIsRendering()}"/>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                         </f:facet>

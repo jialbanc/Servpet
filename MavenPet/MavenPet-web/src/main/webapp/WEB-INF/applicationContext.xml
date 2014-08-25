@@ -38,7 +38,6 @@
     
     <bean id="proxyGrantingTicketStorage" class="org.jasig.cas.client.proxy.ProxyGrantingTicketStorageImpl" />
     <bean id="wrappingFilter" class="org.jasig.cas.client.util.HttpServletRequestWrapperFilter" /> 
-    <bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
     
     <sec:global-method-security pre-post-annotations="enabled" secured-annotations="enabled" />
     
@@ -66,7 +65,7 @@
             <sec:filter-chain pattern="/" filters="casValidationFilter, wrappingFilter" />
             <sec:filter-chain pattern="/j_spring_cas_security_proxyreceptor" filters="casValidationFilter" />
             <sec:filter-chain pattern="/j_spring_security_logout" filters="logoutFilter,etf,fsi" />
-            <sec:filter-chain pattern="/**" filters="casAuthenticationFilter, casValidationFilter, wrappingFilter, sif,j2eePreAuthFilter,logoutFilter,singleLogoutFilter,etf,fsi"/>
+            <sec:filter-chain pattern="/**" filters="casAuthenticationFilter, casValidationFilter, wrappingFilter, sif,j2eePreAuthFilter,logoutFilter,etf,fsi"/>
         </sec:filter-chain-map>
     </bean>
     

@@ -1,0 +1,48 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-ago-2014, 15:51:27
+    Author     : gianella
+*/
+
+#label-registroE{
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-bottom: 9px;
+    background: #344163;
+    color: #ffffff;
+    display: block;
+    width: 450px;
+    height: 30px;
+    border-radius: 5px;
+    
+}
+#datosP{
+    margin-left: 200px;
+    
+}
+#form_registroE .rol
+{
+    margin-left: 600px;
+    padding-bottom: 50px;
+  
+    
+}
+#form_registroE .regu{
+    width: 100px;
+    margin-left: 400px;
+    
+}
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Aug 25, 2014, 3:41:26 PM
+    Author     : Jimmy
+*/
+

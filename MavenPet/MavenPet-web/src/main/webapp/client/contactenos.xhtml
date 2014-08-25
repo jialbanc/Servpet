@@ -8,6 +8,7 @@
         <title>SERVPET</title>
         <link rel="stylesheet" href="../css/index_style.css"/>
         <link rel="stylesheet" href="../css/registro.css"/>
+        <link rel="stylesheet" href="../css/contactClient.css"/>
     </h:head>
     <h:body>
         <div id="panel-background1" class="panel-container">
@@ -29,7 +30,7 @@
                 <h:form id="form">  
                     <p:growl id="messages"/>
                     <p:menubar id="menu">
-                        <p:menuitem value="Home" url="index.xhtml" icon="ui-icon-home">
+                        <p:menuitem value="Home" url="/" icon="ui-icon-home">
                         </p:menuitem>
                         <p:menuitem value="Galeria" url="galeria.xhtml" icon="ui-icon-search">
                         </p:menuitem>
@@ -51,28 +52,23 @@
         </div>
         <div id="panel-background2" class="panel-container">
             <div id="panel-container-body">
-                <p:outputLabel id="label-registro" value="Envienos un mensaje"/>
+                 <p:outputLabel id="label-contact" style="font-weight:bold" value="ENVIENOS UN MENSAJE"/>
                 <div id="panel-registro">
                     <h:form id="form_registro">
                         <p:growl id="msgs" showDetail="true" />
 
                         <h:panelGrid columns="2" cellpadding="5">
-                            <p:outputLabel value="Nombre" for="acNombre" />
-                            <p:autoComplete id="acNombre" value="María" completeMethod="hol1" />
+                            <p:outputLabel value="Asunto:" for="acAsunto" />
+                            <p:autoComplete id="acAsunto" value="#{contactenosClienteManagedBean.asunto}" size="37" style="font-weight:bold"/>
 
-                            <p:outputLabel value="Email" for="acEmail" />
-                            <p:autoComplete id="acEmail" value="maria@correo.com" completeMethod="hol1" />
-
-                            <p:outputLabel value="Mensaje" for="acMensaje" />
-                            <p:inputTextarea id="acMensaje" value="Por favor podrían enviarme costos sobre las vacunas. Gracias" completeMethod="hol1" />
+                            <p:outputLabel value="Mensaje:" for="type" />
+                            <h:inputTextarea id="type" value="#{contactenosClienteManagedBean.mensaje}" cols="40" rows="10" style="font-weight:bold" />
 
                         </h:panelGrid>
 
-                        <p:commandButton id="cb_registrar" value="Enviar" icon="ui-icon-check" />
-
-                        
+                        <p:commandButton action="#{contactenosClienteManagedBean.contact()}" id="cb_registrar" value="Enviar"  style="margin-left: 210px" />
                     </h:form>
-                </div>            
+                </div>                  
             </div>
         </div>
         <div id="panel-background-footer" class="panel-container">
