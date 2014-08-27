@@ -6,29 +6,40 @@
 
 package com.servpet.beans;
 
+import Entities.Citas;
 import Entities.Mascotas;
 import Entities.Usuario;
+import Entities.UsuarioHasCitas;
+import Facades.CitasFacadeLocal;
 import Facades.MascotasFacade;
 import Facades.MascotasFacadeLocal;
 import Facades.UsuarioFacade;
 import Facades.UsuarioFacadeLocal;
+import Facades.UsuarioHasCitasFacadeLocal;
+import static com.servpet.enums.Status.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletContext;
 import org.primefaces.event.CellEditEvent;
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.TreeNode;
 
 /**
  *
  * @author Administrador
  */
 @ManagedBean(name = "historialManagedBean", eager = true)
-@RequestScoped
+@ViewScoped
 public class HistorialManagedBean {
 
     /**
@@ -36,42 +47,53 @@ public class HistorialManagedBean {
     */
     
     @EJB
-    private Facades.MascotasFacadeLocal mascotas;
-    private List<Entities.Mascotas> ltmascotas;
+    private Facades.CitasFacadeLocal citas;
+    private List<Entities.Citas> ltCitas;
+    private Entities.Citas SelectCitas;
+    private List<Entities.Citas> CitasConcluidas;
+   
+    @EJB
+     private Facades.MascotasFacadeLocal mascotas;
+    private List<Entities.Mascotas> ltMascotas;
     
+    @EJB
+    private Facades.UsuarioHasCitasFacadeLocal usuarioCitas;
+    private List<Entities.UsuarioHasCitas> ltusuarioCitas;
+    
+    @EJB
     private Facades.UsuarioFacadeLocal usuario;
+    private Mascotas selectedMascotas; 
     
     private List<Entities.Usuario> usuariosfiltrados;
-   /* public MascotasFacadeLocal getMascotas() {
-        return mascotas;
-    }
-
-    public void setMascotas(MascotasFacadeLocal mascotas) {
-        this.mascotas = mascotas;
-    }
-
-    public List<Mascotas> getLtmascotas() {
-        return ltmascotas = mascotas.findAll();
-        
-    }
-
-    public void setLtmascotas(List<Mascotas> ltmascotas) {
-        this.ltmascotas = ltmascotas;
-    }*/
     
     @PostConstruct
     public void init(){
-        ltmascotas = mascotas.findAll();
+        CitasConcluidas = new ArrayList<Entities.Citas>() {};
+        ltCitas=citas.findAll();
+        for (Citas r : ltCitas){
+            if(r.getEstado().equals(CONCLUDED.getReference())){
+                CitasConcluidas.add(r);
+             }        
+        }
     }
 
-    public List<Mascotas> getLtmascotas() {
-        return ltmascotas;
+    public CitasFacadeLocal getCitas() {
+        return citas;
     }
 
-    public void setLtmascotas(List<Mascotas> ltmascotas) {
-        this.ltmascotas = ltmascotas;
+    public void setCitas(CitasFacadeLocal citas) {
+        this.citas = citas;
     }
 
+    public List<Citas> getLtCitas() {
+        return ltCitas;
+    }
+
+    public void setLtCitas(List<Citas> ltCitas) {
+        this.ltCitas = ltCitas;
+    }
+
+    
     public List<Usuario> getUsuariosfiltrados() {
         return usuariosfiltrados;
     }
@@ -80,37 +102,46 @@ public class HistorialManagedBean {
         this.usuariosfiltrados = usuariosfiltrados;
     }
     
-    public String getUserFromMascota(String userId){
-        return usuario.getUsuarioById(userId).getApellido();
-    }
- 
-
-     public void onRowEdit(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Cliente editado", ((Usuario) event.getObject()).getCedula());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
     
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Usuario) event.getObject()).getCedula());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+    public UsuarioHasCitasFacadeLocal getUsuarioCitas() {
+        return usuarioCitas;
+    }
+
+    public void setUsuarioCitas(UsuarioHasCitasFacadeLocal usuarioCitas) {
+        this.usuarioCitas = usuarioCitas;
+    }
+
+    public List<UsuarioHasCitas> getLtusuarioCitas() {
+        return ltusuarioCitas;
+    }
+
+    public void setLtusuarioCitas(List<UsuarioHasCitas> ltusuarioCitas) {
+        this.ltusuarioCitas = ltusuarioCitas;
+    }
+
+    public Citas getSelectCitas() {
+        return SelectCitas;
+    }
+
+    public void setSelectCitas(Citas SelectCitas) {
+        this.SelectCitas = SelectCitas;
+    }
+
+    public List<Citas> getCitasConcluidas() {
+        return CitasConcluidas;
+    }
+
+    public void setCitasConcluidas(List<Citas> CitasConcluidas) {
+        this.CitasConcluidas = CitasConcluidas;
     }
      
+
     public HistorialManagedBean() {
        
        
     }
-    
-    public void onCellEdit(CellEditEvent event) {
-        Entities.Usuario u= new Usuario();
-        u.setCedula((String) event.getNewValue());
-        
-        Object oldValue = event.getOldValue();
-        Object newValue = event.getNewValue();
-         
-        if(newValue != null && !newValue.equals(oldValue)) {
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Celda cambiada", "Old: " + oldValue + ", New:" + newValue);
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-        }
-    }
- 
+
+
 }
+   
