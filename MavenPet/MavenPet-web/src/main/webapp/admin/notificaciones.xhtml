@@ -49,31 +49,57 @@
                 </div>
             </div>
             <p:dataTable  styleClass="TablaHistorial" var="cita" value="#{notificacionesManagedBean.ltCitas}" widgetVar="historialTable" emptyMessage="No se ha encontrado ningun dato" filteredValue="#{historialManagedBean.usuariosfiltrados}">
-                        <f:facet name="header">
-                            <p:outputPanel>
-                                <h:outputText value="Buscar:" />
-                                <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
-                            </p:outputPanel>
-                        </f:facet>        
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar:" />
+                        <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
+                    </p:outputPanel>
+                </f:facet>  
+                <p:column filterBy="#{noti.nombre} #{noti.apellido}" headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{noti.nombre} #{noti.apellido}" />
+                </p:column>
+                <p:commandButton  update=":form:Detail" oncomplete="PF('Dialog').show()" icon="ui-icon-folder-open">
+                    <f:setPropertyActionListener value="#{noti}" target="#{notificacionesManagedBean.selectNotificaciones}" />
+                </p:commandButton>  
+            </p:dataTable>
+            
+            <p:dialog header="Historial Mascotas" widgetVar="Dialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                <p:outputPanel id="Detail" style="text-align:center;">
+                    <p:panelGrid  id="dialogo" columns="2" rendered="#{not empty historialManagedBean.selectCitas}" columnClasses="label,value">
+                        
+                        <h:outputText value="Nombre" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.nombre}" />
 
+                        <h:outputText value="Raza" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.raza}" />
+                        
+                        <h:outputText value=" Edad" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.edad}  años" />
 
-
-                <p:column filterBy="#{cita.idmascota.nombre}" headerText="Cedula Cliente"  filterMatchMode="contains">
-                            <h:outputText value="#{cita.idmascota.nombre}"  />
-                        </p:column>
-
-                        <p:column filterBy="" headerText="Nombre Cliente"  filterMatchMode="contains">
-                            <h:outputText value=""  />
-                        </p:column>
-
-                         <p:column filterBy="" headerText="E-mail Cliente"  filterMatchMode="contains">
-                             <h:outputText value=""  />
-                        </p:column>
-
-
-
-
-                    </p:dataTable>
+                        <h:outputText value="Genero" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.sexo}" />
+                        
+                        <h:outputText value="Enfermedades" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.enfermedades}" />
+                                                
+                        <h:outputText value="Fecha" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.fecha}" />
+                        
+                        <h:outputText value="Hora" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.hora}" />
+                        
+                        <h:outputText value="Diagnostico" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.diagnostico}" />
+                        
+                        <h:outputText value="Medicinas" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.medicina}" />
+                        
+                        <h:outputText value="Observaciones" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.observaciones}" /> 
+                    </p:panelGrid>
+                </p:outputPanel>
+                
+            </p:dialog>
             <div id="panel-background-footer" class="panel-container">
 
                 <div id="panel-footer-twitter">
