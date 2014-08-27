@@ -20,7 +20,7 @@ body{
 #menu-top{
     padding-top: 1%;
     padding-left: 19%;
-    width: 40%;
+    width: 28%;
     float: left;
 }
 .ui-commandlink{
@@ -40,9 +40,22 @@ body{
     line-height: normal;
     width: 76.5%;
 }
-.ui-menu#form_menutop{
-    width: 20% !important;
+#menu-top .ui-menu{
+    margin-left: 40%;
+    background: none;
+    border: none;
+    font-size: 19px;
+    color:#FFF;
 }
+#menu-top a:hover{
+    color:#EFEFEF;
+    background: transparent;
+    border: none;
+}
+#menu-top a{
+    color:#cccccc;
+}
+
 #panel-background2{
     background-color: #EFEFEF;
     padding-top: 20px;
