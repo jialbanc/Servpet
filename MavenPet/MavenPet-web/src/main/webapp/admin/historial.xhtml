@@ -49,67 +49,70 @@
 
                 </div>
             </div>
-            <!--<p:growl id="msgs" showDetail="true"/>-->
-            <p:dataTable  styleClass="TablaHistorial" rowStyleClass="TablaHistorialfila,TablaHistorialColumn" var="mascota" value="#{historialManagedBean.ltmascotas}" widgetVar="historialTable" emptyMessage="No se ha encontrado ningun dato" filteredValue="#{historialManagedBean.usuariosfiltrados}">
-                    <f:facet name="header">
-                        <p:outputPanel>
-                            <h:outputText value="Buscar:" />
-                            <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
-                        </p:outputPanel>
-                    </f:facet>
-                    
-                <!--<p:ajax event="rowEdit" listener="#{historialManagedBean.onRowEdit}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{historialManagedBean.onRowEdit}" update=":form:msgs" />-->
+                <p:dataTable  id="tabla_historial" styleClass="TablaHistorial" var="cita" value="#{historialManagedBean.citasConcluidas}" widgetVar="historialTable" emptyMessage="No se ha encontrado ningun dato" filteredValue="#{historialManagedBean.usuariosfiltrados}"
+                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                          paginator="true" rows="10" style="margin-bottom:20px">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar:" />
+                        <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
+                    </p:outputPanel>
+                </f:facet>  
+                <p:column filterBy="#{cita.idmascota.idusuario.cedula}" headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{cita.idmascota.idusuario.cedula}" />
+                </p:column>
+                <p:column headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{cita.idmascota.idusuario.nombre}   #{cita.idmascota.idusuario.apellido}" />
+                </p:column>
+                <p:column headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{cita.idmascota.nombre}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton  update=":form:Detail" oncomplete="PF('Dialog').show()" icon="ui-icon-folder-open">
+                        <f:setPropertyActionListener value="#{cita}" target="#{historialManagedBean.selectCitas}" />
+                    </p:commandButton>   
+                </p:column>
                 
-                <p:column filterBy="#{mascota.idusuario}" headerText="Id"  filterMatchMode="contains">
-                    <h:outputText value="#{mascota.idusuario.cedula}"  />
-                </p:column>
+                
+            </p:dataTable>
+            
+            <p:dialog header="Historial Mascotas" widgetVar="Dialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                <p:outputPanel id="Detail" style="text-align:center;">
+                    <p:panelGrid  id="dialogo" columns="2" rendered="#{not empty historialManagedBean.selectCitas}" columnClasses="label,value">
+                        
+                        <h:outputText value="Nombre" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.nombre}" />
 
-                <p:column  headerText="Cliente"  filterMatchMode="contains">
-                    <h:outputText value="#{mascota.idusuario.nombre}"  />
-                </p:column>
+                        <h:outputText value="Raza" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.raza}" />
+                        
+                        <h:outputText value=" Edad" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.edad}  años" />
 
-                    <p:column headerText="Mascota"  filterMatchMode="contains">                                 
-                             <h:outputText value="#{mascota.nombre}"  />
-                             <br></br>
-                    </p:column>
-
-                     <p:column  headerText="Raza"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.raza}"  />
-                            <br></br>
-                    </p:column>
-
-                    <p:column  headerText="Edad"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.edad}"  />
-                            <br></br>
-                    </p:column>
-
-                    <p:column  headerText="Sexo"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.sexo}"  />
-                            <br></br>
-                    </p:column>
-
-                    <p:column  headerText="Enfermedades"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.enfermedades}"  />
-                            <br></br>
-                    </p:column>
-                    <p:column  headerText="Vacunas"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.vacunas}"  />
-                            <br></br>
-                    </p:column>
-                    <p:column  headerText="Medicinas"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.medicinas}"  />
-                            <br></br>
-                    </p:column>
-                    <p:column  headerText="Observaciones"  filterMatchMode="contains">
-                            <h:outputText value="#{mascota.observaciones}"  />
-                            <br></br>
-                    </p:column>
-                    
-                    <p:column style="width:32px">
-                        <p:rowEditor />
-                    </p:column>
-                </p:dataTable>
+                        <h:outputText value="Genero" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.sexo}" />
+                        
+                        <h:outputText value="Enfermedades" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.enfermedades}" />
+                                                
+                        <h:outputText value="Fecha" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.fecha}" />
+                        
+                        <h:outputText value="Hora" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.hora}" />
+                        
+                        <h:outputText value="Diagnostico" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.diagnostico}" />
+                        
+                        <h:outputText value="Medicinas" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.medicina}" />
+                        
+                        <h:outputText value="Observaciones" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.observaciones}" /> 
+                    </p:panelGrid>
+                </p:outputPanel>
+                
+            </p:dialog>
             <div id="panel-background-footer" class="panel-container">
 
                 <div id="panel-footer-twitter">
