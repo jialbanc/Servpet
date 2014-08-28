@@ -8,10 +8,11 @@ and open the template in the editor.
     Author     : Jimmy
 */
 
-#notificaciones{
+#panel-notifi{
     
     width: 900px;
-    padding-left: 215px;  
-    height: 400px;
+    padding-left: 275px;
+    padding-top:50px;
+    height: 450px;
 }
 

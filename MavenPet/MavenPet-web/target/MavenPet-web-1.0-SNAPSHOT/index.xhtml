@@ -20,30 +20,35 @@
                 <div id="menu-top" class="nav-bar">
                     <h:form id="form_menutop">
                         <p:menubar id="menu_top" style="width:68%;">
-                            <p:menuitem value="Home" url="/">
+                            <p:menuitem value="#{msg.home}" url="/">
                             </p:menuitem>
-                            <p:menuitem value="Cerrar Sesión" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" >
+                            <p:menuitem value="#{msg.sesion}" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" >
                             </p:menuitem>
                         </p:menubar>
+                        <h:panelGrid columns="2" >
+                            Language : 
+                            <h:selectOneMenu value="#{languajeManagedBean.localeCode}" onchange="submit()"
+                                    valueChangeListener="#{languajeManagedBean.countryLocaleCodeChanged}">
+                                    <f:selectItems value="#{languajeManagedBean.countriesInMap}" /> 
+                            </h:selectOneMenu>
+                        </h:panelGrid>
                     </h:form>
                 </div>
                 <div id="panel-refill"></div>
                 <h:form id="form">  
                     <p:growl id="messages"/>
                     <p:menubar id="menu">
-                        <p:menuitem value="Home" url="/" icon="ui-icon-home" rendered="true">
+                        <p:menuitem value="#{msg.home}" url="/" icon="ui-icon-home" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Galeria" url="/#{userManagedBean.currentUserRol}/galeria.xhtml" icon="ui-icon-search" rendered="true">
+                        <p:menuitem value="#{msg.calendario}" url="/#{userManagedBean.currentUserRol}/calendario.xhtml" icon="ui-icon-document" rendered="true">
                         </p:menuitem>
-                        <p:menuitem value="Calendario" url="/#{userManagedBean.currentUserRol}/calendario.xhtml" icon="ui-icon-document" rendered="true">
+                        <p:menuitem value="#{msg.historial}" url="/#{userManagedBean.currentUserRol}/historial.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.historialIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Historial" url="/#{userManagedBean.currentUserRol}/historial.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.historialIsRendering()}">
+                        <p:menuitem value="#{msg.con}" url="/#{userManagedBean.currentUserRol}/contactenos.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.contactenosIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Contactenos" url="/#{userManagedBean.currentUserRol}/contactenos.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.contactenosIsRendering()}">
+                        <p:menuitem value="#{msg.registro}" url="/#{userManagedBean.currentUserRol}/registro.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.registroIsRendering()}">
                         </p:menuitem>
-                        <p:menuitem value="Registro" url="/#{userManagedBean.currentUserRol}/registro.xhtml" icon="ui-icon-document" rendered="#{userManagedBean.registroIsRendering()}">
-                        </p:menuitem>
-                        <p:menuitem value="Notificaciones" url="/#{userManagedBean.currentUserRol}/notificaciones.xhtml"  icon="ui-icon-mail-closed" rendered="#{userManagedBean.notificacionesIsRendering()}"/>
+                        <p:menuitem value="#{msg.mensajes}" url="/#{userManagedBean.currentUserRol}/notificaciones.xhtml"  icon="ui-icon-mail-closed" rendered="#{userManagedBean.notificacionesIsRendering()}"/>
                         <f:facet name="options">
                             <p:inputText style="margin-right:10px" placeholder="Search"/>
                         </f:facet>
@@ -60,7 +65,7 @@
         </div>
         <div id="panel-background2" class="panel-container">
             <div id='panel-container-rehome' >
-                <p:outputLabel id="label-rehome" value="REHOME#{userBean.name}" />
+                <p:outputLabel id="label-rehome" value="#{msg.rehome}" />
                 <p:panelGrid id="gridImage" columns="2" >
                     <p:graphicImage value="images/images2.jpg" id="image1" />
                     <p:graphicImage value="images/images3.jpg" id="image2" />
@@ -72,18 +77,20 @@
             </div>
             <div id="panel-container-noticias">
                 <div id="panel-container-tag">
-                    <p:outputLabel id="label-tag" value="ULTIMAS NOTICIAS" />
+                    <p:outputLabel id="label-tag" value="#{msg.ul}" style="margin-left: -30px" />
                 </div> 
+                <br></br>
+                <p:outputLabel id="label-content" style="text-align: justify;color:#ffffff" value="#{msg.conte}."/>
+                                   
+
+
             </div>
             <div id="panel-refill"></div>
         </div>
         <div id="panel-background-footer" class="panel-container">
-            <div id="panel-inner-footer">
-                <p:outputLabel id="label-footer" value="DIVIERTASE Y APRENDA" />
-
-            </div>
+            
             <div id="panel-footer-twitter">
-                <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
+                <p:outputLabel id="label-footer-twitter" value="#{msg.t}" />
                 <a class="twitter-timeline" href="https://twitter.com/ServPetCRM" data-widget-id="481815012780937216">Tweets por @ServPetCRM</a>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
                 if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js"
@@ -91,11 +98,9 @@
 
 
             </div>
-            <div id="panel-footer-contact">
-                <p:outputLabel id="label-footer-contact" value="CONTÁCTENOS" />
-            </div>
+            
             <div id="panel-footer-location">
-                <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
+                <p:outputLabel id="label-footer-location" value="#{msg.lo}" />
                 <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
                         width="90%" height="110%" frameborder="0" style="border:0"></iframe>
             </div>

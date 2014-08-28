@@ -78,20 +78,21 @@ body{
 }
 #panel-footer-twitter{
     float:left;
-    width: 292px;
+    width: 392px;
     height: 260px;
-    padding-top: 15px;
-    padding-left: 10px;
+    padding-top: 25px;
+    padding-left: 60px;
 }
 #label-footer-twitter{
-    color: white;
+    color: #FFF;
     font-size: 15px;
+    
 }
 #panel-footer-contact{
     float:left;
     width: 272px;
     height: 260px;
-    padding-top: 15px;
+    padding-top: 25px;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -101,7 +102,7 @@ body{
 }
 #panel-footer-location{
     float:left;
-    width: 292px;
+    width: 402px;
     height: 260px;
     padding-top: 15px;
     padding-left: 10px;

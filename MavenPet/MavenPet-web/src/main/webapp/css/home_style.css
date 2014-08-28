@@ -31,7 +31,7 @@
 #panel-container-noticias{
     float:left;
     width: 335px;
-    height: 374px;
+    height: 499px;
     background-color: #4D515D;
 }
 #panel-container-tag{
@@ -44,6 +44,6 @@
     padding-top: 10px;
 }
 #panel-container-tag label{
-    padding-top: 20px;
+    padding-top: 30px;
     padding-left: 40px;
 }

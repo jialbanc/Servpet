@@ -4,8 +4,13 @@ com\servpet\enums\Status.class
 com\servpet\beans\CitasEmployeeManagedBean.class
 com\servpet\Car.class
 com\servpet\DataScrollerView.class
+com\servpet\beans\RegistroManagedBean$1.class
+com\servpet\beans\NotificacionesManagedBean$1.class
+com\servpet\beans\RegistroClienteManagedBean$1.class
+com\servpet\beans\HistorialManagedBean$1.class
 com\servpet\beans\ContactenosClienteManagedBean.class
 com\servpet\beans\CitasClientManagedBean.class
+com\servpet\beans\LanguajeManagedBean.class
 com\servpet\ImagesView.class
 com\servpet\beans\RegistroManagedBean.class
 com\servpet\beans\NotificacionesManagedBean.class

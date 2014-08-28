@@ -8,31 +8,11 @@ and open the template in the editor.
     Author     : gianella
 */
 
-#label-registroE{
-    padding-left: 15px;
-    padding-top: 15px;
-    padding-bottom: 9px;
-    background: #344163;
-    color: #ffffff;
-    display: block;
-    width: 450px;
-    height: 30px;
-    border-radius: 5px;
-    
-}
-#datosP{
-    margin-left: 200px;
-    
-}
-#form_registroE .rol
-{
-    margin-left: 600px;
-    padding-bottom: 50px;
-  
-    
-}
-#form_registroE .regu{
-    width: 100px;
-    margin-left: 400px;
-    
+#panel-registroE{
+   margin-left:  220px;
+   background: #cccccc;
+   width: 900px;
+      
+
+   
 }
