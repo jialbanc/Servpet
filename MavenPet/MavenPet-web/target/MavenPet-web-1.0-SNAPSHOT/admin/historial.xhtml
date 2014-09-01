@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>SERVPET</title>
+        <link rel="stylesheet" href="../css/index_style.css"/>
+        <link rel="stylesheet" href="../css/historial.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <div id="panel-background1" class="panel-container">
+                <div id="panel-container-header">
+                    <div id="panel-container-logo">
+                        <p:graphicImage value="../images/logo.png" id="image-logo" />
+                    </div>
+                    <div id="menu-top" class="nav-bar">
+                        <p:menubar id="menu_top" style="width:68%;">
+                            <p:menuitem value="Home" url="/">
+                            </p:menuitem>
+                            <p:menuitem value="Cerrar Sesión" url="https://#{cr.credential}/cas-server-webapp-3.5.2/logout" >
+                            </p:menuitem>
+                        </p:menubar>
+                </div>
+                    <div id="panel-refill"></div>
+
+                    <p:growl id="messages"/>
+                    <p:menubar id="menu">
+                        <p:menuitem value="Home" url="/" icon="ui-icon-home">
+                        </p:menuitem>
+                        <p:menuitem value="Calendario" url="calendario.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Historial" url="historial.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Contáctenos" url="contactenos.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Registro" url="registro.xhtml" icon="ui-icon-document">
+                        </p:menuitem>
+                        <p:menuitem value="Notificaciones" url="notificaciones.xhtml" update="messages" icon="ui-icon-mail-closed" />
+                        <f:facet name="options">
+                            <p:inputText style="margin-right:10px" placeholder="Search"/>
+                        </f:facet>
+                    </p:menubar>
+
+                </div>
+            </div>
+                <p:dataTable  id="tabla_historial" styleClass="TablaHistorial" var="cita" value="#{historialManagedBean.citasConcluidas}" widgetVar="historialTable" emptyMessage="No se ha encontrado ningun dato" filteredValue="#{historialManagedBean.usuariosfiltrados}"
+                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                          paginator="true" rows="10" style="margin-bottom:20px">
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <h:outputText value="Buscar:" />
+                        <p:inputText id="globalFilter" onkeyup="PF('historialTable').filter()" style="width:150px" placeholder="Palabra clave"/>
+                    </p:outputPanel>
+                </f:facet>  
+                <p:column filterBy="#{cita.idmascota.idusuario.cedula}" headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{cita.idmascota.idusuario.cedula}" />
+                </p:column>
+                <p:column headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{cita.idmascota.idusuario.nombre}   #{cita.idmascota.idusuario.apellido}" />
+                </p:column>
+                <p:column headerText="Cedula"  filterMatchMode="contains">
+                    <h:outputText value="#{cita.idmascota.nombre}" />
+                </p:column>
+                <p:column>
+                    <p:commandButton  update=":form:Detail" oncomplete="PF('Dialog').show()" icon="ui-icon-folder-open">
+                        <f:setPropertyActionListener value="#{cita}" target="#{historialManagedBean.selectCitas}" />
+                    </p:commandButton>   
+                </p:column>
+                
+                
+            </p:dataTable>
+            
+            <p:dialog header="Historial Mascotas" widgetVar="Dialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+                <p:outputPanel id="Detail" style="text-align:center;">
+                    <p:panelGrid  id="dialogo" columns="2" rendered="#{not empty historialManagedBean.selectCitas}" columnClasses="label,value">
+                        
+                        <h:outputText value="Nombre" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.nombre}" />
+
+                        <h:outputText value="Raza" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.raza}" />
+                        
+                        <h:outputText value=" Edad" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.edad}  años" />
+
+                        <h:outputText value="Genero" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.sexo}" />
+                        
+                        <h:outputText value="Enfermedades" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.idmascota.enfermedades}" />
+                                                
+                        <h:outputText value="Fecha" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.fecha}" />
+                        
+                        <h:outputText value="Hora" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.hora}" />
+                        
+                        <h:outputText value="Diagnostico" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.diagnostico}" />
+                        
+                        <h:outputText value="Medicinas" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.medicina}" />
+                        
+                        <h:outputText value="Observaciones" />
+                        <h:outputText value="#{historialManagedBean.selectCitas.observaciones}" /> 
+                    </p:panelGrid>
+                </p:outputPanel>
+                
+            </p:dialog>
+            <div id="panel-background-footer" class="panel-container">
+
+                <div id="panel-footer-twitter">
+                    <p:outputLabel id="label-footer-twitter" value="DESDE TWITTER" />
+                    <a class="twitter-timeline" href="https://twitter.com/ServPetCRM" data-widget-id="481815012780937216">Tweets por @ServPetCRM</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+                if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js"
+                    ;fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+                </div>
+                <div id="panel-footer-location">
+                    <p:outputLabel id="label-footer-location" value="LOCALIZACIÓN" />
+                    <iframe id="location_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.4818878065437!2d-79.84325660143905!3d-2.16748146908363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMTAnMDQuMSJTIDc5wrA1MCczMy4xIlc!5e0!3m2!1ses!2sec!4v1403464206093" 
+                            width="90%" height="110%" frameborder="0" style="border:0"></iframe>
+                </div>
+            </div>
+
+        </h:form>
+
+    </h:body>
+</html>
+

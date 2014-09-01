@@ -1,0 +1,17 @@
+#panel-container-body{
+    width: 77%;
+    font-family: 'Arial';
+    background-color: #FFF;
+    padding-bottom: 20px;
+    padding-top: 20px;   
+}
+#label-registro{
+    margin-left: 32%;
+}
+#panel-registro{
+    margin-top: 2%;
+    margin-left: 32%;
+}
+.ui-button{
+    margin-left: 18%;
+}

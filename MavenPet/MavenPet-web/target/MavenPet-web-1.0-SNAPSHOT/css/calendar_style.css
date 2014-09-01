@@ -1,0 +1,33 @@
+#panel-background1{
+    padding-bottom: 90px;
+}
+#panel-container-body{
+    margin-top: 25px;
+    width: 77%;
+    float: left;
+    font-family: 'Arial';
+    background-color: #FFF;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+#panel-container-links{
+    width:93%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 2.5%;
+    padding:1%;
+    background-color: #F5F5F5;
+}
+.ui-commandlink{
+    color: black;
+}
+#label-calendar-title{
+   margin-left: 35%;
+   font-size: 200%;
+}
+#panel-container-calendar{
+    width: 95%;
+    padding-top: 20px;
+    margin-left: 2.5%   
+}
+

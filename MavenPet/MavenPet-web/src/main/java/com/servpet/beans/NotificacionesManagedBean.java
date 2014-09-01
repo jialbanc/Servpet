@@ -12,23 +12,23 @@ import Entities.Rol;
 import Entities.Usuario;
 import Entities.UsuarioHasCitas;
 import Facades.CitasFacadeLocal;
-import static com.servpet.enums.Rol.CLIENT;
-import static com.servpet.enums.Rol.EMPLOYEE;
+import static com.servpet.enums.Rol.*;
 import static com.servpet.enums.Status.CONCLUDED;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author usuario
  */
 @ManagedBean(name = "notificacionesManagedBean", eager = true)
-@RequestScoped
+@ViewScoped
 public class NotificacionesManagedBean {
 
     
@@ -41,13 +41,16 @@ public class NotificacionesManagedBean {
     @EJB
     private Facades.NotificacionesFacadeLocal notificaciones;
     private List<Entities.Notificaciones> ltNotificaciones;
-    private Entities.Notificaciones SelectNotificaciones;
+    private Entities.Usuario userSelected;
+    private Entities.Citas citaSelected;
     
     @EJB
     private Facades.RolFacadeLocal role;
     
     private List<Entities.Usuario> usuariosfiltrados;
-     private Entities.Rol rolEmpleado;
+    private List<Entities.Usuario> ltEmpleados;
+    private List<Entities.Citas> ltCitasEmpleado;
+    private List<Entities.Rol> ltroles;
     
     
     public NotificacionesManagedBean() {
@@ -55,19 +58,60 @@ public class NotificacionesManagedBean {
     
     @PostConstruct
     public void init(){
-        CitasConcluidas = new ArrayList<Entities.Citas>() {};
-        ltCitas=citas.findAll();
-        ltNotificaciones=notificaciones.findAll();
+        ltroles= role.findAll();
+        for (Rol r : ltroles){
+            if(r.getRol().equals(EMPLOYEE.getReference()))
+                ltEmpleados = r.getUsuarioList();
+        }
         
-            for(Rol s : role.findAll()){
-                 if(s.getRol().equals(EMPLOYEE.getReference())){
-                   rolEmpleado = s; 
-                 }   
-            }
     }
-       
-    
 
+    public List<Usuario> getLtEmpleados() {
+        return ltEmpleados;
+    }
+
+    public void setLtEmpleados(List<Usuario> ltEmpleados) {
+        this.ltEmpleados = ltEmpleados;
+    }
+
+    public Usuario getUserSelected() {
+        return userSelected;
+    }
+
+    public void setUserSelected(Usuario userSelected) {
+        ltCitasEmpleado = new ArrayList<Entities.Citas>();
+        for(UsuarioHasCitas u : userSelected.getUsuarioHasCitasList()){
+            if(u.getIdcitas().getEstado().equals(CONCLUDED.getReference()))
+                ltCitasEmpleado.add(u.getIdcitas());
+        }
+        this.userSelected = userSelected;
+    }
+
+    public List<Citas> getLtCitasEmpleado() {
+        return ltCitasEmpleado;
+    }
+
+    public void setLtCitasEmpleado(List<Citas> ltCitasEmpleado) {
+        this.ltCitasEmpleado = ltCitasEmpleado;
+    }
+
+    public List<Rol> getLtroles() {
+        return ltroles;
+    }
+
+    public void setLtroles(List<Rol> ltroles) {
+        this.ltroles = ltroles;
+    }
+
+    public Citas getCitaSelected() {
+        return citaSelected;
+    }
+
+    public void setCitaSelected(Citas citaSelected) {
+        ltNotificaciones = citaSelected.getNotificacionesList();
+        this.citaSelected = citaSelected;
+    }
+    
     public CitasFacadeLocal getCitas() {
         return citas;
     }
@@ -108,22 +152,4 @@ public class NotificacionesManagedBean {
         this.ltNotificaciones = ltNotificaciones;
     }
 
-    public Rol getRolEmpleado() {
-        return rolEmpleado;
-    }
-
-    public void setRolEmpleado(Rol rolEmpleado) {
-        this.rolEmpleado = rolEmpleado;
-    }
-
-    public Notificaciones getSelectNotificaciones() {
-        return SelectNotificaciones;
-    }
-
-    public void setSelectNotificaciones(Notificaciones SelectNotificaciones) {
-        this.SelectNotificaciones = SelectNotificaciones;
-    }
-    
-    
-    
 }
