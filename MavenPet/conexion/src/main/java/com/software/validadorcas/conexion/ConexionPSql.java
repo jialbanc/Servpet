@@ -17,9 +17,9 @@ public class ConexionPSql {
     private final String url = "jdbc:postgresql://";
     private final String serverName = "localhost";
     private final String portNumber = "5432";
-    private final String databaseName = "postgres";
+    private final String databaseName = "veterinaria";
     private final String userName = "postgres";
-    private final String password = "admin";
+    private final String password = "123";
         
         /*Conexion con SQL Server*/
        /* private Connection connection = null;

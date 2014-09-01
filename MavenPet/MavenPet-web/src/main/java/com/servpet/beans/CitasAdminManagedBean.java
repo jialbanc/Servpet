@@ -81,8 +81,10 @@ public class CitasAdminManagedBean implements Serializable {
         }
     }
     
+    
     public Date getDateFromString(String strdate,String strhour){
         try{
+            String s = ""+123;
             Calendar date = Calendar.getInstance();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
             date.setTime(sdf.parse(strdate+" "+strhour));

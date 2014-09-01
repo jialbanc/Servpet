@@ -57,7 +57,18 @@ public class Car {
     }
 
        
-
+public void ho(){
+    int x=0;
+    int y=0;
+    int z=0;
+    if(x==4){
+        if(y==2){
+            if(z==0){
+                
+            }
+        }
+    }
+}
         public int getYear() {
                 return year;
         }
