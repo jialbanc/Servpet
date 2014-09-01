@@ -31,7 +31,6 @@ public class UsuarioHasCitasFacade extends AbstractFacade<UsuarioHasCitas> imple
         super(UsuarioHasCitas.class);
     }
     
-    @Override
     public UsuarioHasCitas getUsuarioByUsuarioCitas(Usuario usuario, Citas cita){
         return (UsuarioHasCitas)em.createNamedQuery("UsuarioHasCitas.findByUsuarioCitas").setParameter("idusuario",usuario).setParameter("idcita", cita).getSingleResult();
     }

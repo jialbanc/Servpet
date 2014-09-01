@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Jimmy
+ * @author gianella
  */
 @Stateless
 public class NotificacionesFacade extends AbstractFacade<Notificaciones> implements NotificacionesFacadeLocal {

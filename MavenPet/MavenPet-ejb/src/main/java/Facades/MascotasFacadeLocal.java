@@ -12,7 +12,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Jimmy
+ * @author gianella
  */
 @Local
 public interface MascotasFacadeLocal {

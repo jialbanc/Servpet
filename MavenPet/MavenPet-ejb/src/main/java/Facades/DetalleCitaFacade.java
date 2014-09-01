@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Jimmy
+ * @author gianella
  */
 @Stateless
 public class DetalleCitaFacade extends AbstractFacade<DetalleCita> implements DetalleCitaFacadeLocal {
