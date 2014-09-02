@@ -1,0 +1,633 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.4
+-- Dumped by pg_dump version 9.3.4
+-- Started on 2014-09-01 21:39:54
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 188 (class 3079 OID 11750)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2027 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- TOC entry 187 (class 3079 OID 24908)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2028 (class 0 OID 0)
+-- Dependencies: 187
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 170 (class 1259 OID 57920)
+-- Name: citas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE citas (
+    idcitas integer NOT NULL,
+    fecha text,
+    hora text,
+    estado text,
+    idmascota integer,
+    medicina text,
+    diagnostico text,
+    observaciones text
+);
+
+
+ALTER TABLE public.citas OWNER TO postgres;
+
+--
+-- TOC entry 171 (class 1259 OID 57926)
+-- Name: citas_idcitas_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE citas_idcitas_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.citas_idcitas_seq OWNER TO postgres;
+
+--
+-- TOC entry 2029 (class 0 OID 0)
+-- Dependencies: 171
+-- Name: citas_idcitas_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE citas_idcitas_seq OWNED BY citas.idcitas;
+
+
+--
+-- TOC entry 172 (class 1259 OID 57928)
+-- Name: contactenos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE contactenos (
+    idcontactenos integer NOT NULL,
+    idusuario text,
+    asunto text,
+    mensaje text
+);
+
+
+ALTER TABLE public.contactenos OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 57934)
+-- Name: contactenos_idcontactenos_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE contactenos_idcontactenos_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.contactenos_idcontactenos_seq OWNER TO postgres;
+
+--
+-- TOC entry 2030 (class 0 OID 0)
+-- Dependencies: 173
+-- Name: contactenos_idcontactenos_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE contactenos_idcontactenos_seq OWNED BY contactenos.idcontactenos;
+
+
+--
+-- TOC entry 174 (class 1259 OID 57936)
+-- Name: detalle_cita; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE detalle_cita (
+    iddetalle_citas integer NOT NULL,
+    idservicio integer,
+    idcitas integer
+);
+
+
+ALTER TABLE public.detalle_cita OWNER TO postgres;
+
+--
+-- TOC entry 175 (class 1259 OID 57939)
+-- Name: detalle_cita_iddetalle_citas_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE detalle_cita_iddetalle_citas_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.detalle_cita_iddetalle_citas_seq OWNER TO postgres;
+
+--
+-- TOC entry 2031 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: detalle_cita_iddetalle_citas_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE detalle_cita_iddetalle_citas_seq OWNED BY detalle_cita.iddetalle_citas;
+
+
+--
+-- TOC entry 176 (class 1259 OID 57941)
+-- Name: mascotas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE mascotas (
+    idmascotas integer NOT NULL,
+    idusuario text,
+    nombre text,
+    sexo text,
+    edad integer,
+    raza text,
+    enfermedades text
+);
+
+
+ALTER TABLE public.mascotas OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 57947)
+-- Name: mascotas_idmascotas_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE mascotas_idmascotas_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.mascotas_idmascotas_seq OWNER TO postgres;
+
+--
+-- TOC entry 2032 (class 0 OID 0)
+-- Dependencies: 177
+-- Name: mascotas_idmascotas_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE mascotas_idmascotas_seq OWNED BY mascotas.idmascotas;
+
+
+--
+-- TOC entry 178 (class 1259 OID 57949)
+-- Name: notificaciones; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE notificaciones (
+    idnotificaciones integer NOT NULL,
+    idcitas integer,
+    hora text,
+    fecha text,
+    imagen text,
+    contenido text,
+    asunto text
+);
+
+
+ALTER TABLE public.notificaciones OWNER TO postgres;
+
+--
+-- TOC entry 179 (class 1259 OID 57955)
+-- Name: notificaciones_idnotificaciones_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE notificaciones_idnotificaciones_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.notificaciones_idnotificaciones_seq OWNER TO postgres;
+
+--
+-- TOC entry 2033 (class 0 OID 0)
+-- Dependencies: 179
+-- Name: notificaciones_idnotificaciones_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE notificaciones_idnotificaciones_seq OWNED BY notificaciones.idnotificaciones;
+
+
+--
+-- TOC entry 180 (class 1259 OID 57957)
+-- Name: rol; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE rol (
+    idrol integer NOT NULL,
+    rol text
+);
+
+
+ALTER TABLE public.rol OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 57963)
+-- Name: rol_idrol_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE rol_idrol_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.rol_idrol_seq OWNER TO postgres;
+
+--
+-- TOC entry 2034 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: rol_idrol_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE rol_idrol_seq OWNED BY rol.idrol;
+
+
+--
+-- TOC entry 182 (class 1259 OID 57965)
+-- Name: servicios; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE servicios (
+    idservicio integer NOT NULL,
+    servicio text
+);
+
+
+ALTER TABLE public.servicios OWNER TO postgres;
+
+--
+-- TOC entry 183 (class 1259 OID 57971)
+-- Name: servicios_idservicio_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE servicios_idservicio_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.servicios_idservicio_seq OWNER TO postgres;
+
+--
+-- TOC entry 2035 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: servicios_idservicio_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE servicios_idservicio_seq OWNED BY servicios.idservicio;
+
+
+--
+-- TOC entry 184 (class 1259 OID 57973)
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario (
+    cedula text NOT NULL,
+    nombre text,
+    apellido text,
+    email text,
+    password text,
+    direccion text,
+    idrol integer
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 185 (class 1259 OID 57979)
+-- Name: usuario_has_citas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE usuario_has_citas (
+    idusuario_citas integer NOT NULL,
+    idusuario text,
+    idcitas integer
+);
+
+
+ALTER TABLE public.usuario_has_citas OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 57985)
+-- Name: usuario_has_citas_idusuario_citas_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE usuario_has_citas_idusuario_citas_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.usuario_has_citas_idusuario_citas_seq OWNER TO postgres;
+
+--
+-- TOC entry 2036 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: usuario_has_citas_idusuario_citas_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE usuario_has_citas_idusuario_citas_seq OWNED BY usuario_has_citas.idusuario_citas;
+
+
+--
+-- TOC entry 1878 (class 2604 OID 57987)
+-- Name: idcitas; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY citas ALTER COLUMN idcitas SET DEFAULT nextval('citas_idcitas_seq'::regclass);
+
+
+--
+-- TOC entry 1879 (class 2604 OID 57988)
+-- Name: idcontactenos; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY contactenos ALTER COLUMN idcontactenos SET DEFAULT nextval('contactenos_idcontactenos_seq'::regclass);
+
+
+--
+-- TOC entry 1880 (class 2604 OID 57989)
+-- Name: iddetalle_citas; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalle_cita ALTER COLUMN iddetalle_citas SET DEFAULT nextval('detalle_cita_iddetalle_citas_seq'::regclass);
+
+
+--
+-- TOC entry 1881 (class 2604 OID 57990)
+-- Name: idmascotas; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mascotas ALTER COLUMN idmascotas SET DEFAULT nextval('mascotas_idmascotas_seq'::regclass);
+
+
+--
+-- TOC entry 1882 (class 2604 OID 57991)
+-- Name: idnotificaciones; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY notificaciones ALTER COLUMN idnotificaciones SET DEFAULT nextval('notificaciones_idnotificaciones_seq'::regclass);
+
+
+--
+-- TOC entry 1883 (class 2604 OID 57992)
+-- Name: idrol; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY rol ALTER COLUMN idrol SET DEFAULT nextval('rol_idrol_seq'::regclass);
+
+
+--
+-- TOC entry 1884 (class 2604 OID 57993)
+-- Name: idservicio; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY servicios ALTER COLUMN idservicio SET DEFAULT nextval('servicios_idservicio_seq'::regclass);
+
+
+--
+-- TOC entry 1885 (class 2604 OID 57994)
+-- Name: idusuario_citas; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuario_has_citas ALTER COLUMN idusuario_citas SET DEFAULT nextval('usuario_has_citas_idusuario_citas_seq'::regclass);
+
+
+--
+-- TOC entry 1887 (class 2606 OID 57996)
+-- Name: citas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY citas
+    ADD CONSTRAINT citas_pkey PRIMARY KEY (idcitas);
+
+
+--
+-- TOC entry 1889 (class 2606 OID 57998)
+-- Name: contactenos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY contactenos
+    ADD CONSTRAINT contactenos_pkey PRIMARY KEY (idcontactenos);
+
+
+--
+-- TOC entry 1891 (class 2606 OID 58000)
+-- Name: detalle_cita_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY detalle_cita
+    ADD CONSTRAINT detalle_cita_pkey PRIMARY KEY (iddetalle_citas);
+
+
+--
+-- TOC entry 1893 (class 2606 OID 58002)
+-- Name: mascotas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY mascotas
+    ADD CONSTRAINT mascotas_pkey PRIMARY KEY (idmascotas);
+
+
+--
+-- TOC entry 1895 (class 2606 OID 58004)
+-- Name: notificaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY notificaciones
+    ADD CONSTRAINT notificaciones_pkey PRIMARY KEY (idnotificaciones);
+
+
+--
+-- TOC entry 1897 (class 2606 OID 58006)
+-- Name: rol_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY rol
+    ADD CONSTRAINT rol_pkey PRIMARY KEY (idrol);
+
+
+--
+-- TOC entry 1899 (class 2606 OID 58008)
+-- Name: servicios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY servicios
+    ADD CONSTRAINT servicios_pkey PRIMARY KEY (idservicio);
+
+
+--
+-- TOC entry 1903 (class 2606 OID 58010)
+-- Name: usuario_has_citas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario_has_citas
+    ADD CONSTRAINT usuario_has_citas_pkey PRIMARY KEY (idusuario_citas);
+
+
+--
+-- TOC entry 1901 (class 2606 OID 58012)
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (cedula);
+
+
+--
+-- TOC entry 1904 (class 2606 OID 58013)
+-- Name: citas_idmascota_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY citas
+    ADD CONSTRAINT citas_idmascota_fkey FOREIGN KEY (idmascota) REFERENCES mascotas(idmascotas);
+
+
+--
+-- TOC entry 1905 (class 2606 OID 58018)
+-- Name: contactenos_idusuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY contactenos
+    ADD CONSTRAINT contactenos_idusuario_fkey FOREIGN KEY (idusuario) REFERENCES usuario(cedula);
+
+
+--
+-- TOC entry 1906 (class 2606 OID 58023)
+-- Name: detalle_cita_idcitas_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalle_cita
+    ADD CONSTRAINT detalle_cita_idcitas_fkey FOREIGN KEY (idcitas) REFERENCES citas(idcitas);
+
+
+--
+-- TOC entry 1907 (class 2606 OID 58028)
+-- Name: detalle_cita_idservicio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY detalle_cita
+    ADD CONSTRAINT detalle_cita_idservicio_fkey FOREIGN KEY (idservicio) REFERENCES servicios(idservicio);
+
+
+--
+-- TOC entry 1908 (class 2606 OID 58033)
+-- Name: mascotas_idusuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY mascotas
+    ADD CONSTRAINT mascotas_idusuario_fkey FOREIGN KEY (idusuario) REFERENCES usuario(cedula);
+
+
+--
+-- TOC entry 1909 (class 2606 OID 58038)
+-- Name: notificaciones_idcitas_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY notificaciones
+    ADD CONSTRAINT notificaciones_idcitas_fkey FOREIGN KEY (idcitas) REFERENCES citas(idcitas);
+
+
+--
+-- TOC entry 1911 (class 2606 OID 58043)
+-- Name: usuario_has_citas_idcitas_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuario_has_citas
+    ADD CONSTRAINT usuario_has_citas_idcitas_fkey FOREIGN KEY (idcitas) REFERENCES citas(idcitas);
+
+
+--
+-- TOC entry 1912 (class 2606 OID 58048)
+-- Name: usuario_has_citas_idusuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuario_has_citas
+    ADD CONSTRAINT usuario_has_citas_idusuario_fkey FOREIGN KEY (idusuario) REFERENCES usuario(cedula);
+
+
+--
+-- TOC entry 1910 (class 2606 OID 58053)
+-- Name: usuario_idrol_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_idrol_fkey FOREIGN KEY (idrol) REFERENCES rol(idrol);
+
+
+--
+-- TOC entry 2026 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-09-01 21:39:55
+
+--
+-- PostgreSQL database dump complete
+--
+
